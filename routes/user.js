@@ -30,6 +30,23 @@ user.post("/login", async (req, res, next) => {
     return res.status(500).json({code: 500, message: "Campos incompletos"});
 });
 
+// Agregar empleados
+user.post("/nuevoempleado", async (req, res, next) => {
+    const { idEmpleado, Nombre, Apellido, Username, Contraseña, Foto } = req.body;
+
+    if (idEmpleado && Nombre && Apellido && Username && Contraseña && Foto) {
+        let query = "INSERT INTO empleados (idEmpleado, Admin, Nombre, Apellido, Username, Contraseña, Foto) ";
+        query += `VALUES ('${idEmpleado}', 0, '${Nombre}', '${Apellido}', '${Username}', '${Contraseña}', '${Foto}');`;
+        const rows = await db.query(query);
+    
+        if(rows.affectedRows == 1) {
+            return res.status(201).json({ code: 201, message: "Usuario registrado correctamente" });
+        }
+        return res.status(500).json({code: 500, message: "Ocurrió un error"});
+    }
+    return res.status(500).json({code: 500, message: "Campos incompletos"});
+});
+
 // Get de todos los empleados
 user.get("/", async (req, res, next) => {
     const query = "SELECT * FROM empleados";
