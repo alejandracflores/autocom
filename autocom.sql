@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-05-2024 a las 07:48:59
+-- Tiempo de generación: 13-05-2024 a las 23:04:01
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -47,20 +47,13 @@ CREATE TABLE `clientes` (
 
 CREATE TABLE `empleados` (
   `idEmpleado` int(11) NOT NULL,
-  `Admin` bit(1) NOT NULL,
+  `Admin` tinyint(1) NOT NULL,
   `Nombre` varchar(255) NOT NULL,
   `Apellido` varchar(255) NOT NULL,
   `Username` varchar(255) NOT NULL,
   `Contraseña` varchar(255) NOT NULL,
   `Foto` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `empleados`
---
-
-INSERT INTO `empleados` (`idEmpleado`, `Admin`, `Nombre`, `Apellido`, `Username`, `Contraseña`, `Foto`) VALUES
-(1, b'0', 'Alejandra', 'Cruz', 'ale', '123', '');
 
 -- --------------------------------------------------------
 
@@ -166,6 +159,28 @@ ALTER TABLE `ventas`
   ADD KEY `idEmpleado` (`idEmpleado`),
   ADD KEY `idVehiculo` (`idVehiculo`),
   ADD KEY `idFinanciamiento` (`idFinanciamiento`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `financiamiento`
+--
+ALTER TABLE `financiamiento`
+  MODIFY `idFinanciamiento` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  MODIFY `idVenta` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
