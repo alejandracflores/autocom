@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./output.css">
     <title>Inicio de sesión</title>
+    <script src="../js/login.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body class="flex items-center w-full h-dvh">
     <div class="flex h-full items-center">
@@ -29,7 +31,7 @@
             justify-center" type="password" id="password" name="password" required><br><br>
             
         </form>
-        <button class=" bg-[#FF002E] py-5 w-[621px] rounded-lg text-white font-bold text-3xl" type="submit">Ingresar</button>
+        <button class="btn btn-primary bg-[#FF002E] py-5 w-[621px] rounded-lg text-white font-bold text-3xl" type="submit" id="btn btn-primary">Ingresar</button>
         <button class="py-5 w-[621px] text-2xl" >No soy vendedor</button>
     </main>
 </body>

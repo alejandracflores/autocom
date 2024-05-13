@@ -6,7 +6,8 @@ const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: '',
-    //database: 'autocom'
+    port:3306,
+    database: 'autocom',
 });
 
 pool.query = util.promisify(pool.query);
