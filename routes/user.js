@@ -14,8 +14,14 @@ user.post("/login", async (req, res, next) => {
         if(rows.length == 1) {
             const token = jwt.sign({
                 idEmpleado: rows[0].idEmpleado,
+                Admin: rows[0].Admin,
+                Nombre: rows[0].Nombre,
+                Apellido: rows[0].Apellido,
+                Username: rows[0].Username,
+                Contraseña: rows[0].Contraseña,
+                Foto: rows[0].Foto
             }, "debugkey");
-            return res.status(200).json({code: 200, message: token });
+            return res.status(200).json({code: 200, message: token, isAdmin: rows[0].Admin });
         }
         else {
             return res.status(200).json({code: 401, message: "Usuario y/o contraseña incorrectos"});

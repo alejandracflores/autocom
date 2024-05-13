@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./output.css">
+    <title>Inicio de sesión</title>
+    <script src="../js/login.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body class="flex items-center w-full h-dvh">
+    <div class="flex h-full items-center">
+        <img class="max-w-[90%] left-0" src="../img/logoCard.png" alt="logo card">
+    </div>
+    <main class="flex flex-col w-full justify-center items-center">
+
+        <h1 class="font-bold text-5xl mb-5">Inicio de sesión</h1>
+        <form class="w-[621px]">
+            <label for="username">Usuario:</label>
+            <input class="bg-[#F3F3F3]
+            rounded-[10px]
+            w-full h-[62px]
+            px-10 py-2 items-center
+            justify-center" type="text" id="username" name="username" required><br><br>
+            
+            <label for="password">Contraseña:</label>
+            <input class="bg-[#F3F3F3]
+            rounded-[10px]
+            w-full h-[62px]
+            px-10 py-2 items-center
+            justify-center" type="password" id="password" name="password" required><br><br>
+            
+        </form>
+        <button class="btn btn-primary bg-[#FF002E] py-5 w-[621px] rounded-lg text-white font-bold text-3xl" type="submit" id="btn btn-primary">Ingresar</button>
+        <button class="py-5 w-[621px] text-2xl" >No soy vendedor</button>
+    </main>
+</body>
+</html>

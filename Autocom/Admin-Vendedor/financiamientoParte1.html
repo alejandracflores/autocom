@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../output.css">
+    <title>Financiamiento P1</title>
+</head>
+
+<body class="w-full px-10 py-[52px]">
+    <h1 class="font-bold text-5xl mb-12">Financiamiento: Paso 1</h1>
+    <main class="flex justify-center items-center">
+
+
+        <!--Seccion de inputs valor del vehiculo, enganche y seleccion de mensualidad-->
+        <section class="flex flex-col w-[810px]">
+            <div class="flex justify-start gap-3 w-full  mb-11">
+
+                <label class="flex flex-col font-bold w-" for="valorVehiculo">
+                    Valor del vehículo
+                    <input class="bg-[#F3F3F3]
+                    rounded-[10px]
+                    w-full h-[62px]
+                    px-10 py-2 items-center
+                    justify-center" type="number" id="valorVehiculo" placeholder="Valor del vehículo">
+                </label>
+                <label class="flex flex-col font-bold" for="engancheVehiculo">
+                    Escoge tu enganche
+                    <input class="bg-[#F3F3F3]
+                    rounded-[10px]
+                    w-full h-[62px]
+                    px-10 py-2 items-center
+                    justify-center" type="number" id="engancheVehiculo" placeholder="Escoge tu enganche">
+
+                </label>
+            </div>
+
+            <article class="flex flex-wrap gap-2">
+
+                <div class="w-[250px] h-28 rounded-xl font-bold border-4 border-red-600 text-2xl">
+                    <input class="hidden" type="radio" id="mensualidad12" name="mensualidad" value="12">
+                    <label class="flex flex-col justify-center items-center w-full h-full " for="mensualidad12">
+                        <p>12 meses</p>
+                        <!--aqui habra que insertar una funcion que calcule la mensualidad-->
+                        <p>$111,111</p>
+                    </label>
+                </div>
+                <div
+                    class="w-[250px] h-28 rounded-xl flex justify-center items-center font-bold border-4 border-red-600 text-2xl">
+                    <input class="hidden" type="radio" id="mensualidad24" name="mensualidad" value="24">
+                    <label class="flex flex-col justify-center items-center w-full h-full " for="mensualidad24">
+                        <p>24 meses</p>
+                        <!--aqui habra que insertar una funcion que calcule la mensualidad-->
+                        <p>$111,111</p>
+                    </label>
+                </div>
+                <div
+                    class="w-[250px] h-28 rounded-xl flex justify-center items-center font-bold border-4 border-red-600 text-2xl">
+                    <input class="hidden" type="radio" id="mensualidad48" name="mensualidad" value="48">
+                    <label class="flex flex-col justify-center items-center w-full h-full " for="mensualidad48">
+                        <p>48 meses</p>
+                        <!--aqui habra que insertar una funcion que calcule la mensualidad-->
+                        <p>$111,111</p>
+                    </label>
+                </div>
+                <div
+                    class="w-[250px] h-28 rounded-xl flex justify-center items-center font-bold border-4 border-red-600 text-2xl">
+                    <input class="hidden" type="radio" id="mensualidad60" name="mensualidad" value="60">
+                    <label class="flex flex-col justify-center items-center w-full h-full " for="mensualidad60">
+                        <p>60 meses</p>
+                        <!--aqui habra que insertar una funcion que calcule la mensualidad-->
+                        <p>$111,111</p>
+                    </label>
+                </div>
+                <div
+                    class="w-[250px] h-28 rounded-xl flex justify-center items-center font-bold border-4 border-red-600 text-2xl">
+                    <input class="hidden" type="radio" id="mensualidad72" name="mensualidad" value="72">
+                    <label class="flex flex-col justify-center items-center w-full h-full " for="mensualidad72">
+                        <p>72 meses</p>
+                        <!--aqui habra que insertar una funcion que calcule la mensualidad-->
+                        <p>$111,111</p>
+                    </label>
+                </div>
+            </article>
+        </section>
+
+        <!--Seccion de imagen de auto y de seleccion de garantía-->
+        <section class="flex flex-col items-center justify-start">
+            <img class="max-w-[302px] mb-[74px]" src="../img/carro1.png" alt="modelo de carro">
+            <div>
+                <label class="font-bold" for="Garantia">Garantía</label>
+                <select class="bg-[#F3F3F3]
+                rounded-[10px]
+                w-full h-[62px]
+                px-10 py-2 items-center
+                justify-center" name="Garantía" id="Garantia">
+                    <option value="" disabled hidden>Selecciona una opción</option>
+                    <option id="12meses" value="12">12 meses</option>
+                    <option id="24meses" value="24">24 meses</option>
+                    <option id="36meses" value="36">36 meses</option>
+                    <option id="48meses" value="48">48 meses</option>
+                    <option id="nodeseo" value="nodeseo">No lo deseo</option>
+                </select>
+            </div>
+        </section>
+
+
+    </main>
+
+
+    <footer class="flex justify-around mt-20">
+        <button class=" bg-gray-600 py-5 px-7 rounded-lg text-white font-bold text-3xl">Cancelar</button>
+        <button class=" bg-[#FF002E] px-32 rounded-lg text-white font-bold text-3xl">Siguiente</button>
+    </footer>
+</body>
+
+
+
+
+<script>
+    // Obtener todos los inputs y labels
+    const inputs = document.querySelectorAll('input[type="radio"]');
+    const labels = document.querySelectorAll('label');
+
+    // Agregar un event listener a cada input
+    inputs.forEach(input => {
+        input.addEventListener('change', function () {
+            // Remover la clase '' de todos los divs
+            document.querySelectorAll('div').forEach(div => {
+                div.classList.remove('bg-red-500', 'text-white');
+            });
+
+            // Si el input está seleccionado, agregar la clase '' a su div padre
+            if (this.checked) {
+                this.closest('div').classList.add('bg-red-500', 'text-white');
+            }
+        });
+    });
+</script>
+
+</html>
