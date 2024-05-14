@@ -47,6 +47,22 @@ user.post("/nuevoempleado", async (req, res, next) => {
     return res.status(500).json({code: 500, message: "Campos incompletos"});
 });
 
+// Actualizar empleados
+user.put("/:id([0-9]+)", async (req, res, next) => {
+    const { Nombre, Apellido, Username, Contraseña, Foto } = req.body;
+
+    if(Nombre && Apellido && Username && Contraseña && Foto) {
+        let query = `UPDATE empleados SET Nombre='${Nombre}', Apellido='${Apellido}', Username='${Username}',`;
+        query += `Contraseña='${Contraseña}', Foto='${Foto}' WHERE idEmpleado=${req.params.id}`;
+        const rows = await db.query(query);
+        if(rows.affectedRows == 1) {
+            return res.status(200).json({ code: 200, message: "Empleado actualizado correctamente" });
+        }
+        return res.status(500).json({ code: 500, message: "Ocurrió un error"});
+    }
+    return res.status(500).json({ code: 500, message: "Campos incompletos" });
+});
+
 // Get de todos los empleados
 user.get("/", async (req, res, next) => {
     const query = "SELECT * FROM empleados";

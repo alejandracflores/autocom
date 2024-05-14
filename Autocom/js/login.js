@@ -5,7 +5,7 @@ function init() {
         document.querySelector('.btn-primary').addEventListener('click', login);
     }
     else {
-        window.location.href = "index.html";
+        window.location.href = "reservaP1.html";
     }
 }
 
@@ -23,7 +23,12 @@ function login() {
     }).then(function(res) {
         if(res.data.code === 200) {
             localStorage.setItem("token", res.data.message);
-            window.location.href = "index.html"
+            localStorage.setItem("isAdmin", res.data.isAdmin);
+            if (res.data.isAdmin === 1) {
+                window.location.href = "index-admin.html";
+            } else {
+                window.location.href = "index-vendedor.html";
+            }
         }
         else {
             alert("Usuario y/o contraseña incorrectos");
