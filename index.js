@@ -1,6 +1,7 @@
 const morgan = require('morgan');
 const express = require('express');
 const app = express();
+require('dotenv').config();
 
 // Routers
 const user = require('./routes/user');
