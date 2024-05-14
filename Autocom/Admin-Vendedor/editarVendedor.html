@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../output.css" />
+    <title>Editar información de vendedor</title>
+  </head>
+
+  <body class="flex flex-col py-[52px] px-20 w-full justify-center">
+    <header>
+      <h1 class="font-sans text-5xl font-bold mb-3">Editar información de vendedor</h1>
+      <p class="text-xl font-normal max-w-[557px]">
+        Estos datos se usarán después para poder inciar sesión en el sistema.
+      </p>
+    </header>
+
+    <form
+      class="flex w-full flex-wrap gap-10 mt-11 mb-10 justify-start text-gray-500 items-center"
+      action=""
+      id="form-agregarVendedor"
+    >
+      <label class="font-bold flex flex-col" for="nombre"
+        >ID
+        <input
+          class="bg-[#F3F3F3] rounded-[10px] w-[370px] h-[62px] px-10 py-2 items-center justify-center"
+          type="text"
+          id="id"
+          name="id"
+          placeholder="ID"
+        />
+      </label>
+
+      <label class="font-bold flex flex-col" for="nombre"
+        >Nombre(s)
+        <input
+          class="bg-[#F3F3F3] rounded-[10px] w-[370px] h-[62px] px-10 py-2 items-center justify-center"
+          type="text"
+          id="nombre"
+          name="nombre"
+          placeholder="Nombre (s)"
+        />
+      </label>
+
+      <label class="font-bold flex flex-col" for="apellidos"
+        >Apellidos
+        <input
+          class="bg-[#F3F3F3] rounded-[10px] w-[370px] h-[62px] px-10 py-2 items-center justify-center"
+          type="text"
+          id="apellidos"
+          name="apellidos"
+          placeholder="Apellidos"
+        />
+      </label>
+
+      <label class="font-bold flex flex-col" for="nombreUsuario"
+        >Nombre de usuario
+        <input
+          class="bg-[#F3F3F3] rounded-[10px] w-[370px] h-[62px] px-10 py-2 items-center justify-center"
+          type="text"
+          id="nombreUsuario"
+          name="nombreUsuario"
+          placeholder="Nombre de usuario"
+        />
+      </label>
+
+      <label class="font-bold flex flex-col" for="contraseña"
+        >Contraseña
+        <input
+          class="bg-[#F3F3F3] rounded-[10px] w-[370px] h-[62px] px-10 py-2 items-center justify-center"
+          type="text"
+          id="contraseña"
+          name="contraseña"
+          placeholder="Contraseña"
+        />
+      </label>
+    </form>
+
+    <div class="w-full flex justify-center">
+      <button
+        class="bg-[#9A9A9A] py-5 px-16 rounded-lg font-bold text-gray-50 mr-10 hover:bg-slate-900"
+      >
+        Cancelar
+      </button>
+      <button
+        class="bg-[#FF002E] py-5 px-12 rounded-lg font-bold text-gray-50 hover:bg-red-400"
+      >
+        Actualizar
+      </button>
+    </div>
+  </body>
+</html>
