@@ -9,7 +9,7 @@ function init() {
         document.querySelector('.btn-primary').addEventListener('click', nuevoEmpleado);
     }
     else {
-        window.location.href = "tablaVendedores.html.html";
+        window.location.href = "tablaVendedores.html";
     }
 }
 

@@ -46,6 +46,7 @@ function displayUser(users) {
                 <td class="border px-4 py-2">${user.Nombre} ${user.Apellido}</td>
                 <td class="border px-4 py-2 flex justify-center">
                     <div class="flex space-x-2">
+                        <button class="btn-ventas bg-gray-500 hover:bg-gray-600 text-white px-4 py-1 rounded-md" data-id="${user.idEmpleado}">Ventas</button>
                         <button class="btn-edit bg-gray-500 hover:bg-gray-600 text-white px-4 py-1 rounded-md" data-id="${user.idEmpleado}">Editar</button>
                         <button class="btn-delete bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-md" data-id="${user.idEmpleado}">Eliminar</button>
                     </div>

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tabla de vendedores</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="../js/Mostrar-Eliminar-Empleados.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body class="bg-gray-100 p-8">
     <header class="flex justify-start w-full mb-20">
@@ -33,57 +35,8 @@
                     <th class="px-4 py-2">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td class="border px-4 py-2">12345</td>
-                    <td class="border px-4 py-2">Jorge Escobar</td>
-                    <td class="border px-4 py-2 flex justify-center">
-                        <div class="flex space-x-2">
-                            <button class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-1 rounded-md ">Editar</button>
-                            <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-md">Eliminar</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="border px-4 py-2">78345</td>
-                    <td class="border px-4 py-2">Catalina Cruz</td>
-                    <td class="border px-4 py-2 flex justify-center">
-                        <div class="flex space-x-2">
-                            <button class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-1 rounded-md ">Editar</button>
-                            <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-md">Eliminar</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="border px-4 py-2">93894</td>
-                    <td class="border px-4 py-2">Mauricio Garzón</td>
-                    <td class="border px-4 py-2 flex justify-center">
-                        <div class="flex space-x-2">
-                            <button class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-1 rounded-md ">Editar</button>
-                            <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-md">Eliminar</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="border px-4 py-2">78345</td>
-                    <td class="border px-4 py-2">Pedro Chávez</td>
-                    <td class="border px-4 py-2 flex justify-center">
-                        <div class="flex space-x-2">
-                            <button class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-1 rounded-md ">Editar</button>
-                            <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-md">Eliminar</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="border px-4 py-2">18938</td>
-                    <td class="border px-4 py-2">Alejandra Cruz</td>
-                    <td class="border px-4 py-2 flex justify-center">
-                        <div class="flex space-x-2">
-                            <button class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-1 rounded-md ">Editar</button>
-                            <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-md">Eliminar</button>
-                        </div>
-                    </td>
-                </tr>
+            <tbody id="employee-columns">
+                <!-- Aquí se imprimen los datos -->
             </tbody>
         </table>
     </main>
