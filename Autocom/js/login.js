@@ -1,9 +1,7 @@
 window.onload = init;
 
 function init() {
-    if(localStorage.getItem("token")) {
-        document.querySelector('.btn-primary').addEventListener('click', login);
-    }
+    document.querySelector('.btn-primary').addEventListener('click', login);
 }
 
 function login() {
@@ -22,9 +20,9 @@ function login() {
             localStorage.setItem("token", res.data.message);
             localStorage.setItem("isAdmin", res.data.isAdmin);
             if (res.data.isAdmin === 1) {
-                window.location.href = "tablaVendedores.html";
+                window.location.href = "http://localhost:3000/tablavendedores";
             } else {
-                window.location.href = "index-vendedor.html";
+                window.location.href = "http://localhost:3000/";
             }
         }
         else {
