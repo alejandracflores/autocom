@@ -63,6 +63,17 @@ user.put("/:id([0-9]+)", async (req, res, next) => {
     return res.status(500).json({ code: 500, message: "Campos incompletos" });
 });
 
+// Eliminar un empleado
+user.delete("/:id", async (req, res, next) => {
+    const query = `DELETE FROM empleados WHERE idEmpleado=${req.params.id}`;
+    const rows = await db.query(query);
+
+    if(rows.affectedRows == 1) {
+        return res.status(200).json({ code: 200, message: "Empleado borrado correctamente" });
+    }
+    return res.status(400).json({ code: 400, message: "Empleado no encontrado" });
+})
+
 // Get de todos los empleados
 user.get("/", async (req, res, next) => {
     const query = "SELECT * FROM empleados";
