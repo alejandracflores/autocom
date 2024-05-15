@@ -49,10 +49,10 @@ user.post("/nuevoempleado", async (req, res, next) => {
 
 // Actualizar empleados
 user.put("/:id([0-9]+)", async (req, res, next) => {
-    const { Nombre, Apellido, Username, Contraseña, Foto } = req.body;
+    const { idEmpleado, Nombre, Apellido, Username, Contraseña, Foto } = req.body;
 
-    if(Nombre && Apellido && Username && Contraseña && Foto) {
-        let query = `UPDATE empleados SET Nombre='${Nombre}', Apellido='${Apellido}', Username='${Username}',`;
+    if(idEmpleado && Nombre && Apellido && Username && Contraseña && Foto) {
+        let query = `UPDATE empleados SET idEmpleado='${idEmpleado}', Nombre='${Nombre}', Apellido='${Apellido}', Username='${Username}',`;
         query += `Contraseña='${Contraseña}', Foto='${Foto}' WHERE idEmpleado=${req.params.id}`;
         const rows = await db.query(query);
         if(rows.affectedRows == 1) {
@@ -78,6 +78,17 @@ user.delete("/:id", async (req, res, next) => {
 user.get("/byname", async (req, res, next) => {
     const emps = await db.query("SELECT * FROM empleados");
     return res.status(200).json({ code: 200, message: emps });
+});
+
+// Obtener empleado por ID
+user.get('/:id([0-9]+)', async (req, res, next) => {
+    const id = req.params.id;
+    const emp = await db.query("SELECT * FROM empleados WHERE idEmpleado = " + id + ";");
+    
+    if (emp.length > 0) {
+        return res.status(200).json({ code: 200, message: emp });
+    }
+    return res.status(404).json({ code: 404, message: "Empleado no encontrado" });
 });
 
 // Get de todos los empleados
