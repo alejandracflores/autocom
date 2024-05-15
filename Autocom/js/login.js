@@ -25,7 +25,7 @@ function login() {
             localStorage.setItem("token", res.data.message);
             localStorage.setItem("isAdmin", res.data.isAdmin);
             if (res.data.isAdmin === 1) {
-                window.location.href = "index-admin.html";
+                window.location.href = "tablaVendedores.html";
             } else {
                 window.location.href = "index-vendedor.html";
             }
