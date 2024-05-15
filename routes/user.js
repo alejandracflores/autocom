@@ -74,6 +74,12 @@ user.delete("/:id", async (req, res, next) => {
     return res.status(400).json({ code: 400, message: "Empleado no encontrado" });
 })
 
+// Obtener todos los empleados
+user.get("/byname", async (req, res, next) => {
+    const emps = await db.query("SELECT * FROM empleados");
+    return res.status(200).json({ code: 200, message: emps });
+});
+
 // Get de todos los empleados
 user.get("/", async (req, res, next) => {
     const query = "SELECT * FROM empleados";
