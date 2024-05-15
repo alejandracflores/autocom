@@ -3,8 +3,7 @@ window.onload = init;
 function init() {
     if(localStorage.getItem("token")) {
         loadUser();
-    }
-    else {
+    } else {
         window.location.href = "tablaVendedores.html";
     }
 }
@@ -19,6 +18,9 @@ function loadUser() {
     }).then(function (res) {
         console.log(res);
         displayUser(res.data.message);
+        document.querySelectorAll('.btn-delete').forEach(button => {
+            button.addEventListener('click', confirmDeletion);
+        });
     }).catch(function (err) {
         console.log(err);
     });
@@ -37,10 +39,34 @@ function displayUser(users) {
                 <td class="border px-4 py-2">${user.Nombre} ${user.Apellido}</td>
                 <td class="border px-4 py-2 flex justify-center">
                     <div class="flex space-x-2">
-                        <button class="btn-delete bg-gray-500 hover:bg-gray-600 text-white px-4 py-1 rounded-md ">Editar</button>
-                        <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-md">Eliminar</button>
+                        <button class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-1 rounded-md ">Editar</button>
+                        <button class="btn-delete bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-md" data-id="${user.idEmpleado}">Eliminar</button>
                     </div>
                 </td>
             </tr>`;
+    });
+}
+
+function confirmDeletion(event) {
+    if(confirm("¿Estás seguro de que quieres eliminarlo?")) {
+        let id = event.target.dataset.id;
+        deleted(id);
+    }
+}
+
+function deleted(id) {
+    axios({
+        method: 'delete',
+        url: 'http://localhost:3000/user/' + id,
+        headers: {
+            Authorization: 'Bearer '+ localStorage.getItem("token"),
+        }
+    }).then(function(res) {
+        console.log(res);
+        alert("El empleado fue eliminado correctamente");
+        location.reload();
+    }).catch(function(err){
+        console.log(err);
+        alert("Error al eliminar el empleado. Por favor, inténtalo de nuevo");
     });
 }
