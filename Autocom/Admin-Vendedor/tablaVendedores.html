@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,23 +9,33 @@
     <script src="../js/Mostrar-Eliminar-Vendedores.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
+
 <body class="bg-gray-100 p-8">
-    <header class="flex justify-start w-full mb-20">
+    <header class="flex justify-between w-full mb-20">
         <img class="w-80 h-[53px]" src="../img/logoAutocom.png" alt="logo autocom">
+        <div class="relative">
+            <img src="../img/usuarios/12.png" alt="Foto de perfil" class="w-10 h-10 rounded-full">
+        </div>
     </header>
 
     <main class="container mx-auto">
+
+<!--Barra de busqueda, select y boton de agregar boton-->
+        <div class="flex space-x-2 items-center mb-5">
+            <div class="flex w-full space-x-2 px-28">
+                <input type="text" placeholder="Busca un vendedor" class="px-4 rounded-lg w-full h-16 font-bold">
+                <select class="p-2" name="searchBy" id="searchBy">
+                    <option value="ID">ID</option>
+                    <option value="Nombre">Nombre</option>
+                </select>
+                <button class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md"
+                    onclick="window.location.href = 'agregarVendedor.html'">+</button>
+            </div>
+        </div>
+
+
         <div class="flex justify-between items-center mb-4">
             <h1 class="text-2xl font-bold">Vendedores</h1>
-            <div class="flex space-x-2 items-center">
-                <div class="relative">
-                    <img src="../img/joji.jpg" alt="Foto de perfil" class="w-10 h-10 rounded-full">
-                </div>
-                <div class="flex space-x-2">
-                    <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md">Buscar vendedor</button>
-                    <button class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md" onclick="window.location.href = 'agregarVendedor.html'">+</button>
-                </div>
-            </div>
         </div>
 
         <table class="min-w-full bg-white border border-gray-200">
@@ -41,4 +52,5 @@
         </table>
     </main>
 </body>
+
 </html>
