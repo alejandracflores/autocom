@@ -99,11 +99,11 @@ user.get('/:name', async (req, res, next) => {
 });
 
 // Get de todos los empleados
-user.get("/", async (req, res, next) => {
-    const query = "SELECT * FROM empleados";
-    const rows = await db.query(query);
+// user.get("/", async (req, res, next) => {
+//     const query = "SELECT * FROM empleados";
+//     const rows = await db.query(query);
 
-    return res.status(200).json({code: 200, message: rows});
-});
+//     return res.status(200).json({code: 200, message: rows});
+// });
 
 module.exports = user;

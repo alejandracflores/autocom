@@ -66,13 +66,13 @@ app.get('/useraccount', (req, res) => {
 // Rutas de los archivos Cliente
 const path_c = '/autocom/Cliente/';
 app.get('/financiamiento1', (req, res) => {
-  res.sendFile(path.join(__dirname, path_av + 'financiamientoParte1.html'));
+  res.sendFile(path.join(__dirname, path_c + 'financiamientoParte1.html'));
 });
 app.get('/financiamiento2', (req, res) => {
-  res.sendFile(path.join(__dirname, path_av + 'financiamientoParte2.html'));
+  res.sendFile(path.join(__dirname, path_c + 'financiamientoParte2.html'));
 });
 app.get('/financiamiento3', (req, res) => {
-  res.sendFile(path.join(__dirname, path_av + 'financiamientoParte3.html'));
+  res.sendFile(path.join(__dirname, path_c + 'financiamientoParte3.html'));
 });
 
 app.listen(process.env.PORT || 3000, () => {
