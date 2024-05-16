@@ -28,46 +28,51 @@ app.use('/user', user);
 // Archivos estáticos
 app.use(express.static('autocom'));
 
+// Ruta Index
+app.get('/home', (req, res) => {
+  res.sendFile(path.join(__dirname, '/autocom/autocom.html'));
+});
+
 // Rutas de los archivos Admin-Vendedor
 const path_av = '/autocom/Admin-Vendedor/';
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, path_av + 'login.html'));
 });
-app.get('/agregarVendedor', (req, res) => {
+app.get('/agregarvendedor', (req, res) => {
   res.sendFile(path.join(__dirname, path_av + 'agregarVendedor.html'));
 });
-app.get('/editarVendedor', (req, res) => {
-  res.sendFile(path.join(__dirname, path_av + 'editarvendedor.html'));
+app.get('/editarvendedor', (req, res) => {
+  res.sendFile(path.join(__dirname, path_av + 'editarVendedor.html'));
 });
 app.get('/financiamiento1', (req, res) => {
-  res.sendFile(path.join(__dirname, path_av + 'financiamientoparte1.html'));
+  res.sendFile(path.join(__dirname, path_av + 'financiamientoParte1.html'));
 });
 app.get('/financiamiento2', (req, res) => {
-  res.sendFile(path.join(__dirname, path_av + 'financiamientoparte2.html'));
+  res.sendFile(path.join(__dirname, path_av + 'financiamientoParte2.html'));
 });
 app.get('/financiamiento3', (req, res) => {
-  res.sendFile(path.join(__dirname, path_av + 'financiamientoparte3.html'));
+  res.sendFile(path.join(__dirname, path_av + 'financiamientoParte3.html'));
 });
 app.get('/reserva1', (req, res) => {
   res.sendFile(path.join(__dirname, path_av + 'reserva1.html'));
 });
-app.get('/tablaVendedores', (req, res) => {
-  res.sendFile(path.join(__dirname, path_av + 'tablavendedores.html'));
+app.get('/tablavendedores', (req, res) => {
+  res.sendFile(path.join(__dirname, path_av + 'tablaVendedores.html'));
 });
-app.get('/userAccount', (req, res) => {
-  res.sendFile(path.join(__dirname, path_av + 'useraccount.html'));
+app.get('/useraccount', (req, res) => {
+  res.sendFile(path.join(__dirname, path_av + 'userAccount.html'));
 });
 
 // Rutas de los archivos Cliente
 const path_c = '/autocom/Cliente/';
 app.get('/financiamiento1', (req, res) => {
-  res.sendFile(path.join(__dirname, path_av + 'financiamientoparte1.html'));
+  res.sendFile(path.join(__dirname, path_av + 'financiamientoParte1.html'));
 });
 app.get('/financiamiento2', (req, res) => {
-  res.sendFile(path.join(__dirname, path_av + 'financiamientoparte2.html'));
+  res.sendFile(path.join(__dirname, path_av + 'financiamientoParte2.html'));
 });
 app.get('/financiamiento3', (req, res) => {
-  res.sendFile(path.join(__dirname, path_av + 'financiamientoparte3.html'));
+  res.sendFile(path.join(__dirname, path_av + 'financiamientoParte3.html'));
 });
 
 app.listen(process.env.PORT || 3000, () => {

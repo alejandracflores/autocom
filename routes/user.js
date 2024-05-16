@@ -13,15 +13,11 @@ user.post("/login", async (req, res, next) => {
     if (Username && Contraseña) {
         if(rows.length == 1) {
             const token = jwt.sign({
-                idEmpleado: rows[0].idEmpleado,
                 Admin: rows[0].Admin,
-                Nombre: rows[0].Nombre,
-                Apellido: rows[0].Apellido,
-                Username: rows[0].Username,
-                Contraseña: rows[0].Contraseña,
+                idEmpleado: rows[0].idEmpleado,
                 Foto: rows[0].Foto
             }, "debugkey");
-            return res.status(200).json({code: 200, message: token, isAdmin: rows[0].Admin });
+            return res.status(200).json({code: 200, message: token, id: rows[0].idEmpleado, isAdmin: rows[0].Admin, fotoPerfil: rows[0].Foto});
         }
         else {
             return res.status(200).json({code: 401, message: "Usuario y/o contraseña incorrectos"});
@@ -40,7 +36,7 @@ user.post("/nuevoempleado", async (req, res, next) => {
         const rows = await db.query(query);
     
         if(rows.affectedRows == 1) {
-            return res.status(201).json({ code: 201, message: "Usuario registrado correctamente" });
+            return res.status(201).json({ code: 201, message: "Vendedor registrado correctamente" });
         }
         return res.status(500).json({code: 500, message: "Ocurrió un error"});
     }
@@ -56,7 +52,7 @@ user.put("/:id([0-9]+)", async (req, res, next) => {
         query += `Contraseña='${Contraseña}', Foto='${Foto}' WHERE idEmpleado=${req.params.id}`;
         const rows = await db.query(query);
         if(rows.affectedRows == 1) {
-            return res.status(200).json({ code: 200, message: "Empleado actualizado correctamente" });
+            return res.status(200).json({ code: 200, message: "Vendedor actualizado correctamente" });
         }
         return res.status(500).json({ code: 500, message: "Ocurrió un error"});
     }
@@ -69,9 +65,9 @@ user.delete("/:id", async (req, res, next) => {
     const rows = await db.query(query);
 
     if(rows.affectedRows == 1) {
-        return res.status(200).json({ code: 200, message: "Empleado borrado correctamente" });
+        return res.status(200).json({ code: 200, message: "Vendedor borrado correctamente" });
     }
-    return res.status(400).json({ code: 400, message: "Empleado no encontrado" });
+    return res.status(400).json({ code: 400, message: "Vendedor no encontrado" });
 })
 
 // Obtener todos los empleados
@@ -85,6 +81,17 @@ user.get('/:id([0-9]+)', async (req, res, next) => {
     const id = req.params.id;
     const emp = await db.query("SELECT * FROM empleados WHERE idEmpleado = " + id + ";");
     
+    if (emp.length > 0) {
+        return res.status(200).json({ code: 200, message: emp });
+    }
+    return res.status(404).json({ code: 404, message: "Vendedor no encontrado" });
+});
+
+// Obtener empleado por Nombre
+user.get('/:name', async (req, res, next) => {
+    const name = req.params.name;
+    const emp = await db.query("SELECT * FROM empleados WHERE CONCAT(Nombre, ' ', Apellido) LIKE '%" + name + "%';");
+
     if (emp.length > 0) {
         return res.status(200).json({ code: 200, message: emp });
     }

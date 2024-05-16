@@ -12,9 +12,22 @@
 
 <body class="bg-gray-100 p-8">
     <header class="flex justify-between w-full mb-20">
-        <img class="w-80 h-[53px]" src="../img/logoAutocom.png" alt="logo autocom">
+        <img class="w-80 h-[53px]" src="../img/logoAutocom.png" alt="logo autocom" onclick="window.location.href = '/tablavendedores'">
         <div class="relative">
-            <img src="../img/usuarios/12.png" alt="Foto de perfil" class="w-10 h-10 rounded-full">
+            <!-- Imagen de perfil -->
+            <img id="foto-perfil" src="../img/usuarios/1.png" alt="Foto de perfil" class="w-10 h-10 rounded-full" onclick="window.location.href = '/useraccount'">
+
+            <script>
+                // Obtener el valor almacenado en localStorage
+                const fotoPerfil = localStorage.getItem('fotoPerfil');
+                // Si hay un valor en localStorage, establecerlo como src de la imagen
+                if (fotoPerfil) {
+                    document.getElementById('foto-perfil').src = fotoPerfil;
+                } else {
+                    // Si no hay ningún valor en localStorage, establecer una imagen predeterminada
+                    document.getElementById('foto-perfil').src = 'nothing.png';
+                }
+            </script>
         </div>
     </header>
 
@@ -23,13 +36,14 @@
 <!--Barra de busqueda, select y boton de agregar boton-->
         <div class="flex space-x-2 items-center mb-5">
             <div class="flex w-full space-x-2 px-28">
-                <input type="text" placeholder="Busca un vendedor" class="px-4 rounded-lg w-full h-16 font-bold">
+                <input type="text" placeholder="Busca un vendedor" class="px-4 rounded-lg w-full h-16 font-bold" id="search-input">
                 <select class="p-2" name="searchBy" id="searchBy">
                     <option value="ID">ID</option>
                     <option value="Nombre">Nombre</option>
                 </select>
+                <button class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md" onclick="searchEmployee()">Buscar</button>
                 <button class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md"
-                    onclick="window.location.href = 'agregarVendedor'">+</button>
+                    onclick="window.location.href = '/agregarVendedor'">+</button>
             </div>
         </div>
 

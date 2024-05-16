@@ -9,7 +9,7 @@
 
 <body class="w-full px-10 py-[52px]">
         <header class="flex justify-between w-full mb-20">
-            <img class="w-80 h-[53px]" src="../img/logoAutocom.png" alt="logo autocom">
+            <img class="w-80 h-[53px]" src="../img/logoAutocom.png" alt="logo autocom" onclick="window.location.href = '/tablaVendedores'">
             <div class="w-full flex justify-end">
                 <button onclick="window.location.href='tablaVendedores' ">
                 <svg height="48px" viewBox="0 -960 960 960" width="48px" fill="#EA3323"><path d="m249-207-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"/></svg>
@@ -21,7 +21,18 @@
         <main class="flex justify-center items-center h-screen">
             <div class="text-center">
                 <div class="flex items-center justify-center">
-                    <img src="../img/joji.jpg" alt="Imagen de perfil" class="w-16 h-16 mr-4 ">
+                    <img src="" alt="Imagen de perfil" class="w-16 h-16 mr-4" id="foto-perfil">
+                    <script>
+                        // Obtener el valor almacenado en localStorage
+                        const fotoPerfil = localStorage.getItem('fotoPerfil');
+                        // Si hay un valor en localStorage, establecerlo como src de la imagen
+                        if (fotoPerfil) {
+                            document.getElementById('foto-perfil').src = fotoPerfil;
+                        } else {
+                            // Si no hay ningún valor en localStorage, establecer una imagen predeterminada
+                            document.getElementById('foto-perfil').src = 'nothing.png';
+                        }
+                    </script>
                     <h1 class="text-5xl font-bold ml-4">Bienvenido <br>Jorge</h1>
                 </div>
                 <br>
