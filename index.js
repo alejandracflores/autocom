@@ -34,7 +34,7 @@ app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, path_av + 'login.html'));
 });
 app.get('/agregarVendedor', (req, res) => {
-  res.sendFile(path.join(__dirname, path_av + 'agregarvendedor.html'));
+  res.sendFile(path.join(__dirname, path_av + 'agregarVendedor.html'));
 });
 app.get('/editarVendedor', (req, res) => {
   res.sendFile(path.join(__dirname, path_av + 'editarvendedor.html'));
