@@ -54,7 +54,7 @@ app.get('/financiamiento3', (req, res) => {
   res.sendFile(path.join(__dirname, path_av + 'financiamientoParte3.html'));
 });
 app.get('/reserva1', (req, res) => {
-  res.sendFile(path.join(__dirname, path_av + 'reserva1.html'));
+  res.sendFile(path.join(__dirname, path_av + 'reservaP1.html'));
 });
 app.get('/tablavendedores', (req, res) => {
   res.sendFile(path.join(__dirname, path_av + 'tablaVendedores.html'));
