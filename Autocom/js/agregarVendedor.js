@@ -19,7 +19,7 @@ function nuevoEmpleado() {
     var Apellido = document.getElementById('apellidos').value;
     var Username = document.getElementById('nombreUsuario').value;
     var Contraseña = document.getElementById('contraseña').value;
-    var rutaFoto = "../images/usuarios/" + idEmpleado + ".png"; 
+    var rutaFoto = "../img/usuarios/" + idEmpleado + ".png"; 
 
     axios({
         method: 'post',
