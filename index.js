@@ -67,6 +67,9 @@ app.get('/tablavendedores', (req, res) => {
 app.get('/useraccount', (req, res) => {
   res.sendFile(path.join(__dirname, path_av + 'userAccount.html'));
 });
+app.get('/catalogo', (req, res) => {
+  res.sendFile(path.join(__dirname, path_av + 'catalogo.html'));
+});
 
 // Rutas de los archivos Cliente
 const path_c = '/autocom/Cliente/';
