@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+    <!--<link rel="stylesheet" href="../Styles/catalogo.css">-->
+    <title>Catálogo de Vehículos</title>
+</head>
+<body>
+  <!--******* NAVBAR ****************-->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
+    <a class="navbar-brand" href="#">
+      <img class="logo" src="../img/logoAutocom.png" alt="Logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <form class="form-inline frmbtn mx-auto">
+        <input placeholder="Busca un vehículo" class="form-control mr-sm-2" type="search" aria-label="Search">
+        <button  class="btn btn-outline-danger my-2 my-sm-0" type="submit">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+          </svg>
+        </button>
+      </form>
+      <div class="ml-auto d-flex align-items-center">
+        <div class="picture-p"></div>
+      </div>
+    </div>
+  </nav>
+  <!--******* CARDS ******************-->
+  <div class="row g-0 cards1">
+    <% if (catalogo.length === 0) { %>
+      <p>No se encontraron vehículos.</p>
+    <% } else { %>
+      <% catalogo.forEach(item => { %>
+        <div>
+          <p>ID: <%= item.idVehiculo %></p>
+          <p>Modelo: <%= item.Modelo %></p>
+          <p>Marca: <%= item.Marca %></p>
+          <p>Año: <%= item.Año %></p>
+          <p>Precio: <%= item.Precio %></p>
+          <p>TipoVehiculo: <%= item.TipoVehiculo %></p>
+          <p>Color: <%= item.Color %></p>
+          <p>Kilometraje: <%= item.Kilometraje %></p>
+          <p>NumeroSerie: <%= item.NumeroSerie %></p>
+          <p>Estado: <%= item.Estado %></p>
+          <p>Otros: <%= item.Otros %></p>
+          <p>Stock: <%= item.Stock %></p>
+        </div>
+      <% }); %>
+    <% } %>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

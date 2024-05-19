@@ -6,24 +6,29 @@ const path = require("path");
 
 // Routers
 const user = require('./routes/user');
+const catalogoRouter = require('./routes/catalogo'); // Añadido para el catálogo
 
 // Middlewares
-//const auth = require('./middleware/auth');
-//const notFound = require('./middleware/notFound');
+// const auth = require('./middleware/auth');
+// const notFound = require('./middleware/notFound');
 const index = require('./middleware/index');
 const cors = require('./middleware/cors');
 
-// App
+// Configuración del motor de vistas
+app.set('views', path.join(__dirname, 'Autocom/Admin-Vendedor'));
+app.set('view engine', 'ejs');
+
+// Middlewares
 app.use(morgan('dev'));
 app.use(cors);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
 app.get('/', index);
 app.use('/user', user);
-//app.use(auth);
-//app.use(notFound);
+app.use('/catalogo', catalogoRouter);
+// app.use(auth);
+// app.use(notFound);
 
 // Archivos estáticos
 app.use(express.static('autocom'));
@@ -76,5 +81,5 @@ app.get('/financiamiento3', (req, res) => {
 });
 
 app.listen(process.env.PORT || 3000, () => {
-    console.log('Servidor en funcionamiento...');
-  });
+  console.log('Servidor en funcionamiento...');
+});
