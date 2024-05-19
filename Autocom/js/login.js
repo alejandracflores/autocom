@@ -19,6 +19,8 @@ function login() {
         if(res.data.code === 200) {
             localStorage.setItem("token", res.data.message);
             localStorage.setItem("isAdmin", res.data.isAdmin);
+            localStorage.setItem("id", res.data.id);
+            localStorage.setItem("fotoPerfil", res.data.fotoPerfil);
             if (res.data.isAdmin === 1) {
                 window.location.href = "http://localhost:3000/tablavendedores";
             } else {

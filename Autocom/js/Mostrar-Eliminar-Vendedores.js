@@ -55,6 +55,67 @@ function displayUser(users) {
     });
 }
 
+// Función de buscar vendedos
+function searchEmployee() {
+    let searchData = document.getElementById('search-input').value;
+    let searchBy = document.getElementById('searchBy').value;
+
+    if (!searchData) {
+        alert('Por favor, ingrese un dato para buscar.');
+        return;
+    }
+
+    let endpoint = `http://localhost:3000/user/${searchData}`;
+    if (searchBy === 'ID') {
+        endpoint = `http://localhost:3000/user/${searchData}`;
+    } else if (searchBy === 'Nombre') {
+        endpoint = `http://localhost:3000/user/${searchData}`;
+    }
+    axios.get(endpoint, { headers: { Authorization: 'Bearer ' + localStorage.getItem("token") } })
+        .then(function (response) {
+            displayUserSearch(response.data.message);
+            document.querySelectorAll('.btn-delete').forEach(button => {
+                button.addEventListener('click', confirmDeletion);
+            });
+            document.querySelectorAll('.btn-edit').forEach(button => {
+                button.addEventListener('click', function() {
+                    let id = button.dataset.id;
+                    window.location.href = 'http://localhost:3000/editarvendedor?id=' + id;
+                    console.log(id);
+                });
+            });
+        })
+        .catch(function (error) {
+            alert(`Error: ${error.response.data.message}`);
+            console.log(error);
+        });
+}
+
+function displayUserSearch(users) {
+    const detailsDiv = document.getElementById('employee-columns');
+    detailsDiv.innerHTML = '';
+
+    if (users && users.length > 0) {
+        users.forEach(user => {
+            detailsDiv.innerHTML += `
+                <tr>
+                    <td class="border px-4 py-2">${user.idEmpleado}</td>
+                    <td class="border px-4 py-2">${user.Nombre} ${user.Apellido}</td>
+                    <td class="border px-4 py-2 flex justify-center">
+                        <div class="flex space-x-2">
+                            <button class="btn-ventas bg-gray-500 hover:bg-gray-600 text-white px-4 py-1 rounded-md" data-id="${user.idEmpleado}">Ventas</button>
+                            <button class="btn-edit bg-gray-500 hover:bg-gray-600 text-white px-4 py-1 rounded-md" data-id="${user.idEmpleado}">Editar</button>
+                            <button class="btn-delete bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-md" data-id="${user.idEmpleado}">Eliminar</button>
+                        </div>
+                    </td>
+                </tr>
+                <button class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md" onclick="window.location.href = '/tablavendedores'">Volver</button>`;
+        });
+    } else {
+        detailsDiv.innerHTML = '<tr><td colspan="3" class="text-center">No se encontraron usuarios.</td></tr>';
+    }
+}
+
 // Función de eliminar
 function confirmDeletion(event) {
     if(confirm("¿Estás seguro de que quieres eliminarlo?")) {
