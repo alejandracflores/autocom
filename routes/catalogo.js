@@ -1,17 +1,12 @@
 const express = require('express');
-const router = express.Router();
-const mostrarCatalogo = require('../Autocom/js/mostrarCatalogo');
+const jwt = require('jsonwebtoken');
+const catalogo = express.Router();
+const db = require('../config/database');
 
 // Ruta para obtener los datos del catálogo
-router.get('/', async (req, res) => {
-    try {
-        const catalogo = await mostrarCatalogo.obtenerCatalogo();
-        console.log('Datos del catálogo:', catalogo); 
-        res.render('catalogo', { catalogo: Array.isArray(catalogo) ? catalogo : [] });
-    } catch (error) {
-        console.error('Error al obtener el catálogo:', error);
-        res.status(500).send('Error al obtener el catálogo');
-    }
+catalogo.get('/', async (req, res, next) => {
+    const vehiculos = await db.query("SELECT * FROM inventario");
+    return res.status(200).json({ code: 200, message: vehiculos });
 });
 
-module.exports = router;
+module.exports = catalogo;

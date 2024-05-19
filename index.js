@@ -6,7 +6,7 @@ const path = require("path");
 
 // Routers
 const user = require('./routes/user');
-const catalogoRouter = require('./routes/catalogo'); // Añadido para el catálogo
+const catalogo = require('./routes/catalogo');
 
 // Middlewares
 // const auth = require('./middleware/auth');
@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get('/', index);
 app.use('/user', user);
-app.use('/catalogo', catalogoRouter);
+app.use('/catalogo', catalogo);
 // app.use(auth);
 // app.use(notFound);
 
