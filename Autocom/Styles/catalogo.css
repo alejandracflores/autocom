@@ -1,4 +1,4 @@
-/*{
+*{
     margin:0;
     padding: 0;
 }
@@ -86,7 +86,7 @@ a{
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-}*/
+}
 /* CODIGO DE ESTILOS DEL NAVBAR */
 .navbar-custom {
     display: flex;

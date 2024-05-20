@@ -6,7 +6,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
-    <!--<link rel="stylesheet" href="../Styles/catalogo.css">-->
+    <script defer src="../js/mostrarCatalogo.js"></script>
+    <script defer src="../../routes/catalogo.js"></script>
+    <link rel="stylesheet" href="../Styles/catalogo.css">
     <title>Catálogo de Vehículos</title>
 </head>
 <body>
@@ -38,20 +40,48 @@
       <p>No se encontraron vehículos.</p>
     <% } else { %>
       <% catalogo.forEach(item => { %>
-        <div>
-          <p>ID: <%= item.idVehiculo %></p>
-          <p>Modelo: <%= item.Modelo %></p>
-          <p>Marca: <%= item.Marca %></p>
-          <p>Año: <%= item.Año %></p>
-          <p>Precio: <%= item.Precio %></p>
-          <p>TipoVehiculo: <%= item.TipoVehiculo %></p>
-          <p>Color: <%= item.Color %></p>
-          <p>Kilometraje: <%= item.Kilometraje %></p>
-          <p>NumeroSerie: <%= item.NumeroSerie %></p>
-          <p>Estado: <%= item.Estado %></p>
-          <p>Otros: <%= item.Otros %></p>
-          <p>Stock: <%= item.Stock %></p>
-        </div>
+        <div class="col-md-6">
+          <div class="card mb-3 mx-2" style="max-width: 670px; max-height:308px;">
+            <div class="row g-0">
+              <div class="col-md-4 div-img">
+                  <img class="card-img" id="card-img" src="<%= item.imagenVehiculo %>" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <div class="row g-0">
+                    <div class="car-name col-md-7"><%= item.Marca %><div class="col-md-2 year"><%= item.Año %></div></div>
+                    <% if (item.Stock >= 0) { %>               
+                      <div class="a col-md-4"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="14" viewBox="0 0 16 15" fill="none">
+                        <circle cx="8" cy="7.5" r="7.5" fill="#00FF29"/>
+                        </svg> Disponible</div><% }else{ %>
+                      <div class="a col-md-4"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="14" viewBox="0 0 16 15" fill="none">
+                      <circle cx="8" cy="7.5" r="7.5" fill="#00FF29"/>
+                      </svg> Reservado</div>
+                      <% } %>
+                  </div>
+                  <div class="row g-0"> 
+                    <div class="col-md-6">
+                      <div class="information">
+                        Kilometraje: <%= item.Kilometraje %>
+                        Modelo: <%= item.Modelo %>
+                        Tipo de vehículo: <%= item.TipoVehiculo %>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="price">
+                        <p id="text">Precio:</p><p id="price">$<%= item.Precio %></p>
+                    </div>
+                  </div>
+                  </div>
+                  </div>
+                  <div class="buttons row g-0">
+                    <div class="btn btn-danger" type="button">Reservar vehículo</div>
+                    <div class="btn btn-secondary" type="button">Detalles</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
       <% }); %>
     <% } %>
   </div>

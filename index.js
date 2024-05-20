@@ -6,7 +6,7 @@ const path = require("path");
 
 // Routers
 const user = require('./routes/user');
-const catalogoRouter = require('./routes/catalogo'); // Añadido para el catálogo
+const catalogoRouter = require('./routes/catalogo'); 
 
 // Middlewares
 // const auth = require('./middleware/auth');
