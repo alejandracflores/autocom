@@ -39,37 +39,37 @@
     <% if (catalogo.length === 0) { %>
       <p>No se encontraron vehículos.</p>
     <% } else { %>
-      <% catalogo.forEach(item => { %>
+      <% for (let i = 0; i < catalogo.length; i++) { %>
         <div class="col-md-6">
           <div class="card mb-3 mx-2" style="max-width: 670px; max-height:308px;">
             <div class="row g-0">
               <div class="col-md-4 div-img">
-                  <img class="card-img" id="card-img" src="<%= item.imagenVehiculo %>" alt="...">
+                  <img class="card-img" id="card-img" src="<%= catalogo[i].imagenVehiculo %>" alt="...">
               </div>
               <div class="col-md-8">
                 <div class="card-body">
                   <div class="row g-0">
-                    <div class="car-name col-md-7"><%= item.Marca %><div class="col-md-2 year"><%= item.Año %></div></div>
-                    <% if (item.Stock >= 0) { %>               
+                    <div class="car-name col-md-7"><%= catalogo[i].Marca %><div class="col-md-3 year"><%= catalogo[i].Año %></div></div>
+                    <% if (catalogo[i].Stock >= 0) { %>               
                       <div class="a col-md-4"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="14" viewBox="0 0 16 15" fill="none">
                         <circle cx="8" cy="7.5" r="7.5" fill="#00FF29"/>
                         </svg> Disponible</div><% }else{ %>
-                      <div class="a col-md-4"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="14" viewBox="0 0 16 15" fill="none">
-                      <circle cx="8" cy="7.5" r="7.5" fill="#00FF29"/>
-                      </svg> Reservado</div>
+                      <div class="a col-md-4"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
+                        <circle cx="8" cy="7.5" r="7.5" fill="#BE0021"/>
+                        </svg>Reservado</div>
                       <% } %>
                   </div>
                   <div class="row g-0"> 
                     <div class="col-md-6">
                       <div class="information">
-                        Kilometraje: <%= item.Kilometraje %>
-                        Modelo: <%= item.Modelo %>
-                        Tipo de vehículo: <%= item.TipoVehiculo %>
+                        <p>Kilometraje: <%= catalogo[i].Kilometraje %></p>
+                        <p>Modelo: <%= catalogo[i].Modelo %></p>
+                        <p>Tipo: <%= catalogo[i].TipoVehiculo %> </p>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="price">
-                        <p id="text">Precio:</p><p id="price">$<%= item.Precio %></p>
+                        <p id="text">Precio:</p><p id="price">$<%= catalogo[i].Precio %></p>
                     </div>
                   </div>
                   </div>
@@ -82,7 +82,7 @@
               </div>
             </div>
           </div>
-      <% }); %>
+      <% } %>
     <% } %>
   </div>
 

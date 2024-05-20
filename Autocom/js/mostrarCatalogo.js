@@ -2,10 +2,19 @@ const pool = require('../../config/database');
 
 // Función para obtener el inventario
 async function obtenerCatalogo() {
-    const query = 'SELECT * FROM inventario';
-    const [rows] = await pool.query(query);
-    console.log('Datos obtenidos de la base de datos:', rows);
-    return rows;
+    try {
+        const query = 'SELECT * FROM inventario';
+        const rows = await pool.query(query);
+        console.log(rows);
+        console.log(typeof rows);
+        for (let i = 1; i < rows.length; i++) {
+            console.log(rows[i]);
+        }
+        return rows;
+    } catch (error) {
+        console.error('Error al obtener el catálogo:', error);
+        throw error;
+    }
 }
 
 module.exports = { obtenerCatalogo };

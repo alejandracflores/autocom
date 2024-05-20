@@ -53,6 +53,14 @@
     line-height: normal;
     margin-top: 20px;
     margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.information p{
+    display: flex;
+    vertical-align: auto;
+    margin-top: 1px;
+    margin-bottom: 1px;
 }
 .div-img{
     display: flex;
