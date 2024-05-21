@@ -7,6 +7,7 @@ const path = require("path");
 // Routers
 const user = require('./routes/user');
 const catalogoRouter = require('./routes/catalogo'); 
+const catalogoCliente = require('./routes/catalogoC');
 
 // Middlewares
 // const auth = require('./middleware/auth');
@@ -15,7 +16,11 @@ const index = require('./middleware/index');
 const cors = require('./middleware/cors');
 
 // Configuración del motor de vistas
-app.set('views', path.join(__dirname, 'Autocom/Admin-Vendedor'));
+app.set('views', 
+  [
+    path.join(__dirname, 'Autocom/Admin-Vendedor'),
+    path.join(__dirname, 'Autocom/Cliente')
+  ]);
 app.set('view engine', 'ejs');
 
 // Middlewares
@@ -27,6 +32,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', index);
 app.use('/user', user);
 app.use('/catalogo', catalogoRouter);
+app.use('/catalogoCliente', catalogoCliente);
 // app.use(auth);
 // app.use(notFound);
 

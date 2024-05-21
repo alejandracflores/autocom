@@ -1,7 +1,7 @@
 const pool = require('../../config/database');
 
 // Función para obtener el inventario
-async function obtenerCatalogo() {
+async function obtenerC() {
     try {
         const query = 'SELECT * FROM inventario';
         const rows = await pool.query(query);
@@ -11,4 +11,4 @@ async function obtenerCatalogo() {
         throw error;
     }
 }
-module.exports = { obtenerCatalogo };
+module.exports = { obtenerC };
