@@ -1,0 +1,91 @@
+.card-custom {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-body {
+    background-color: #f8f9fa;
+}
+
+.card-img-top {
+    border-bottom: 2px solid #ddd;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.card-subtitle {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.price {
+    font-size: 1.5rem;
+    color: red;
+    font-weight: bold;
+    margin-top: 1px;
+}
+
+.details-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.details-button:hover {
+    background-color: darkred;
+}
+
+.card-footer {
+    background-color: #f8f9fa;
+    border-top: none;
+    font-size: 0.9rem;
+    color: gray;
+}
+
+.wrap .right{
+    margin-left: 150px;
+}
+.textModel {
+    color: #868686;
+    text-align: left;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom: 1px;
+    margin-top: 15px;
+    margin-left: 8px;
+}
+.model{
+    color: #868686;
+    text-align: left;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 1px;
+    margin-left: 8px;
+}
+.text-price{
+    color: #868686;
+    text-align: left;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 1px;
+    margin-left: 8px;
+    margin-top: 1px;
+}
+.containerPrice{
+    row-gap: 60px;
+    margin-left: 63px;
+}

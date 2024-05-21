@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Vehículos</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../Styles/stylesCliente.css" rel="stylesheet">
+    <link rel="stylesheet" href="../Styles/catalogo.css">
+</head>
+<body>
+    <!-- ******** NAVBAR *********-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
+        <a class="navbar-brand" href="#">
+          <img class="logo" src="../img/logoAutocom.png" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <form class="form-inline frmbtn mx-auto">
+            <input placeholder="Busca un vehículo" class="form-control mr-sm-2" type="search" aria-label="Search">
+            <button  class="btn btn-outline-danger my-2 my-sm-0" type="submit">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+              </svg>
+            </button>
+          </form>
+          <div class="ml-auto d-flex align-items-center">
+            <div class="picture-p"></div>
+          </div>
+        </div>
+      </nav>
+      <!-- ****** CARDS *******-->
+    <div class="container mt-5">
+        <div class="row">
+            <% catalogo.forEach(vehiculo => { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card card-custom">
+                        <img src="<%= vehiculo.imagenVehiculo %>" class="card-img-top" alt="<%= vehiculo.Marca %>">
+                        <div class="card-body">
+                            <div class="wrap row g-0">
+                                <div class="col-ml-6">
+                                <h5 class="card-title"><%= vehiculo.Marca %></h5>
+                                <h6 class="card-subtitle mb-2 text-muted"><%= vehiculo.Año %></h6>
+                            </div>
+                                <div class="right col-ml-6">
+                                    <div class="availability d-flex align-items-center">
+                                        <% if (vehiculo.Stock >= 0) { %>               
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="14" viewBox="0 0 16 15" fill="none" class="mr-2">
+                                                <circle cx="8" cy="7.5" r="7.5" fill="#00FF29"/>
+                                            </svg>
+                                            Disponible
+                                        <% } else { %>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none" class="mr-2">
+                                                <circle cx="8" cy="7.5" r="7.5" fill="#BE0021"/>
+                                            </svg>
+                                            Reservado
+                                        <% } %>
+                                    </div>
+                                    <p><%= vehiculo.Kilometraje %> km</p>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="row g-0">
+                                <div class="col-md-5 containterModel">
+                                    <p class="textModel">Modelo</p>
+                                    <p class="model"><%= vehiculo.Modelo %></p>
+                                </div>
+                                <div class="containerPrice col-md-5">
+                                    <p class="text-price">Precio: </p>
+                                    <p class="price mt-3">$<%= vehiculo.Precio %></p>
+                                </div>
+                            </div>
+                            <button class="details-button">Detalles</button>
+                        <div class="card-footer text-center">
+                            Audi,Qro. Qro.
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
