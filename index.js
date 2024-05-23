@@ -3,11 +3,13 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 const path = require("path");
+const router = express.Router();
 
 // Routers
 const user = require('./routes/user');
 const catalogoRouter = require('./routes/catalogo'); 
 const catalogoCliente = require('./routes/catalogoC');
+const financiamientoRoutes = require('./routes/financiamiento');
 
 // Middlewares
 // const auth = require('./middleware/auth');
@@ -33,6 +35,7 @@ app.get('/', index);
 app.use('/user', user);
 app.use('/catalogo', catalogoRouter);
 app.use('/catalogoCliente', catalogoCliente);
+app.use('/', financiamientoRoutes);
 // app.use(auth);
 // app.use(notFound);
 
