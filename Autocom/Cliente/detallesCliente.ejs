@@ -29,12 +29,21 @@
   <div class="container-fluid">
       <img src="<%= vehiculo.imagenVehiculo %>" alt=".....">
   </div>
-  <div class="container-sm availability">
-      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 19 19" fill="none">
-          <circle cx="9.5" cy="9.5" r="9.5" fill="#00FF29"/>
-      </svg>
-      <h4 class="text-availability">Disponible</h4>
-  </div>
+  <% if(vehiculo.Stock > 0) { %>
+    <div class="container-sm availability">
+        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 19 19" fill="none">
+            <circle cx="9.5" cy="9.5" r="9.5" fill="#00FF29"/>
+        </svg>
+        <h4 class="text-availability">Disponible</h4>
+    </div>
+    <% }else{ %>
+      <div class="container-sm availability">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
+              <circle cx="8" cy="7.5" r="7.5" fill="#BE0021"/>
+            </svg>
+          <h4 class="text-availability">Reservado</h4>
+      </div>
+      <% } %>
   <div class="row g-1">
       <div class="col-md-12 info1">
           <div class="card card1">
