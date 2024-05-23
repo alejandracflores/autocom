@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Detalles</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../Styles/detallescar.css">
+</head>
+<body>
+    <!-- Modal -->
+<div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="detallesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="detallesModalLabel"><img src="./../img/logoAutocom.png" alt="" srcset=""></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="window.location.href='catalogo.ejs'">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Contenido de detallesCarro.ejs sin las etiquetas HTML, HEAD y BODY -->
+  <div class="container-fluid">
+      <img src="<%= vehiculo.imagenVehiculo %>" alt=".....">
+  </div>
+  <% if(vehiculo.Stock > 0) { %>
+  <div class="container-sm availability">
+      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 19 19" fill="none">
+          <circle cx="9.5" cy="9.5" r="9.5" fill="#00FF29"/>
+      </svg>
+      <h4 class="text-availability">Disponible</h4>
+  </div>
+  <% }else{ %>
+    <div class="container-sm availability">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
+            <circle cx="8" cy="7.5" r="7.5" fill="#BE0021"/>
+          </svg>
+        <h4 class="text-availability">Reservado</h4>
+    </div>
+    <% } %>
+  <div class="row g-1">
+      <div class="col-md-12 info1">
+          <div class="card card1">
+              <div class="card-body">
+                  <div class="dates">
+                      <h2 class="card-title"><%= vehiculo.Modelo %></h2>
+                      <h2 class="card-title car-date"><%= vehiculo.Año %></h2>
+                  </div>
+                  <div class="info">
+                      <h6 class="card-subtitle mb-2"><%= vehiculo.TipoVehiculo %></h6>
+                      <p class="card-text ubication">Audi Qro, Qro.</p>
+                      <div class="div-price">
+                          <p class="text-price">PRECIO : </p>
+                          <p class="price">$<%= vehiculo.Precio %></p>
+                      </div>
+                  </div>
+                  <div class="buttons">
+                      <div class="btn btn-secondary">Obtener financiamiento</div>
+                      <div class="btn btn-danger">Reservar vehículo</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-12">
+          <div class="card info2">
+              <h4 class="card-title informationc">Información del vehículo</h4>
+              <div class="card-body">
+                  <ul class="list">
+                      <li class="list-item">Modelo: <%= vehiculo.Modelo %></li>
+                      <li class="list-item">Marca: <%= vehiculo.Marca %></li>
+                      <li class="list-item">Kilometraje: <%= vehiculo.Kilometraje %></li>
+                      <li class="list-item">Estado: <%= vehiculo.Estado %></li>
+                      <li class="list-item">Año: <%= vehiculo.Año %></li>
+                      <li class="list-item">Color: <%= vehiculo.Color %></li>
+                      <li class="list-item">Tipo de Vehículo: <%= vehiculo.TipoVehiculo %></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-md-12 characteristics">
+          <div class="card c2">
+              <div class="card-body">
+                  <p class="card-text">Otras características</p>
+                  <div class="card-body">
+                      <ul class="list">
+                          <li class="list-item"><%= vehiculo.Otros %></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="row g-1 footer1">
+      <div class="col-md-6">
+          <div class="card mb-5 one">
+              <div class="row g-0">
+                  <div class="col-md-4">
+                      <img src="../img/icons/transparency.png" class="img" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                      <div class="card-body">
+                          <h5 class="card-title">TRANSPARENCIA</h5>
+                          <p class="card-text">Sabemos que la honestidad es muy importante, por eso te entregamos una radiografía completa del vehículo que te estás llevando.</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-6">
+          <div class="card mb-5 two">
+              <div class="row g-0">
+                  <div class="col-md-4">
+                      <img src="../img/icons/warranty.png" class="img" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                      <div class="card-body">
+                          <h5 class="card-title">GARANTÍA MECÁNICA</h5>
+                          <p class="card-text">Nuestros autos se entregan a los clientes con inspección y verificación completa de más de 200 puntos.</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="row g-0 footer3 justify-content-center">
+      <div class="col-12 d-flex justify-content-center">
+          <div class="card mb-5">
+              <div class="row g-0">
+                  <div class="col-md-4">
+                      <img src="../img/icons/satisfaction-warranty.png" class="img" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                      <div class="card-body">
+                          <h5 class="card-title">GARANTÍA DE SATISFACCIÓN</h5>
+                          <p class="card-text">Todos nuestros autos tienen garantía de satisfacción: devuélvelo o cámbialo dentro de 10 días o 400 km.</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="row g-0 footer3 justify-content-center">
+      <div class="col-12 d-flex justify-content-center">
+          <div class="card mb-5">
+              <div class="row g-0">
+                  <div class="col-md-4">
+                      <img src="../img/icons/takecar.png" class="img" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                      <div class="card-body">
+                          <h5 class="card-title">TOMAMOS TU AUTO A CUENTA</h5>
+                          <p class="card-text">Deja a tu antiguo compañero con nosotros sin restricciones y estrena ese auto que tanto quieres.</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>  
+    </body>
+    </html>
+    

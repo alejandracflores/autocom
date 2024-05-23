@@ -38,6 +38,7 @@ app.use('/catalogoCliente', catalogoCliente);
 
 // Archivos estáticos
 app.use(express.static('autocom'));
+app.use(express.static(path.join(__dirname, 'Autocom')));
 
 // Ruta Index
 app.get('/home', (req, res) => {
