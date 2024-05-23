@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
     <script defer src="../js/mostrarCatalogo.js"></script>
     <script defer src="../../routes/catalogo.js"></script>
-    <link rel="stylesheet" href="../Styles/catalogo.css">
+    <link rel="stylesheet" href="./../Styles/catalogo.css">
     <title>Catálogo de Vehículos</title>
 </head>
 <body>
@@ -76,7 +76,7 @@
                   </div>
                   <div class="buttons row g-0">
                     <div class="btn btn-danger" type="button">Reservar vehículo</div>
-                    <div class="btn btn-secondary" type="button">Detalles</div>
+                    <button class="btn btn-secondary btn-detalles" data-id="<%= catalogo[i].idVehiculo %>" type="button" data-bs-toggle="modal" data-bs-target="#detallesModal">Detalles</button>
                   </div>
                 </div>
               </div>
@@ -84,8 +84,42 @@
           </div>
       <% } %>
     <% } %>
+    <!-- Modal -->
+<div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="detallesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detallesModalLabel">Detalles del Vehículo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="window.location.reload()" aria-label="Close" style="color: red;"></button>
+      </div>
+      <div class="modal-body" id="detalles-container">
+        <!-- Los detalles del vehículo se cargarán aquí -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location.reload()">Cerrar</button>
+    </div>
+    </div>
   </div>
+</div>
 
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.btn-detalles').forEach(button => {
+        button.addEventListener('click', function () {
+          const idVehiculo = this.getAttribute('data-id');
+          fetch(`/catalogo/detalles/${idVehiculo}`)
+            .then(response => response.text())
+            .then(html => {
+              document.getElementById('detalles-container').innerHTML = html;
+            })
+            .catch(error => console.error('Error al cargar los detalles del vehículo:', error));
+        });
+      });
+    });
+  </script>
+  
+  
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

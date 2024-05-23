@@ -22,7 +22,7 @@
         <div class="collapse navbar-collapse" id="navbarContent">
           <form class="form-inline frmbtn mx-auto">
             <input placeholder="Busca un vehículo" class="form-control mr-sm-2" type="search" aria-label="Search">
-            <button  class="btn btn-outline-danger my-2 my-sm-0" type="submit">
+            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
               </svg>
@@ -74,7 +74,7 @@
                                     <p class="price mt-3">$<%= vehiculo.Precio %></p>
                                 </div>
                             </div>
-                            <button class="details-button">Detalles</button>
+                            <button class="btn btn-primary details-button" data-id="<%= vehiculo.idVehiculo %>" data-toggle="modal" data-target="#detallesModal">Detalles</button>
                         <div class="card-footer text-center">
                             Audi,Qro. Qro.
                         </div>
@@ -83,7 +83,38 @@
             <% }) %>
         </div>
     </div>
-
+        <!-- Modal -->
+    <div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="detallesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="../img/logoAutocom.png" alt="Logo" height="50">
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="detalles-container">
+                <!-- Los detalles del vehículo se cargarán aquí -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location.reload()">Cerrar</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.details-button').forEach(button => {
+                button.addEventListener('click', function () {
+                    const idVehiculo = this.getAttribute('data-id');
+                    fetch(`/catalogoCliente/detalles/${idVehiculo}`)
+                        .then(response => response.text())
+                        .then(html => {
+                            document.getElementById('detalles-container').innerHTML = html;
+                        })
+                        .catch(error => console.error('Error al cargar los detalles del vehículo:', error));
+                });
+            });
+        });
+    </script>
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
