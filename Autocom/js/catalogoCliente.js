@@ -11,4 +11,5 @@ async function obtenerC() {
         throw error;
     }
 }
-module.exports = { obtenerC };
+
+module.exports = { obtenerC };  
