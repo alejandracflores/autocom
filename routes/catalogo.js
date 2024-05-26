@@ -30,5 +30,22 @@ router.get('/detalles/:idVehiculo', async (req, res) => {
     }
 });
 
+router.get('/buscar', async (req, res) => {
+    try {
+        const { query } = req.query; // Obtener el parámetro de búsqueda de la query string
+        const catalogo = await mostrarCatalogo.obtenerCatalogo();
+
+        // Filtrar el catálogo basado en la búsqueda
+        const resultados = catalogo.filter(vehiculo => 
+            vehiculo.Marca.toLowerCase().includes(query.toLowerCase()) ||
+            vehiculo.Modelo.toLowerCase().includes(query.toLowerCase())
+        );
+
+        res.render('encontrado', { catalogo: resultados });
+    } catch (error) {
+        console.error('Error al buscar vehículos:', error);
+        res.status(500).send('Error al buscar vehículos');
+    }
+});
 
 module.exports = router;
