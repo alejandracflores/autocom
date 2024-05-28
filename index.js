@@ -21,7 +21,8 @@ const cors = require('./middleware/cors');
 app.set('views', 
   [
     path.join(__dirname, 'Autocom/Admin-Vendedor'),
-    path.join(__dirname, 'Autocom/Cliente')
+    path.join(__dirname, 'Autocom/Cliente'),
+    // Agrega aquí cualquier otro directorio donde puedan estar tus vistas
   ]);
 app.set('view engine', 'ejs');
 
@@ -65,31 +66,8 @@ app.get('/financiamiento1', (req, res) => {
 app.get('/financiamiento2', (req, res) => {
   res.sendFile(path.join(__dirname, path_av + 'financiamientoParte2.html'));
 });
-app.get('/financiamiento3', (req, res) => {
-  res.sendFile(path.join(__dirname, path_av + 'financiamientoParte3.html'));
-});
-app.get('/reserva1', (req, res) => {
-  res.sendFile(path.join(__dirname, path_av + 'reservaP1.html'));
-});
-app.get('/tablavendedores', (req, res) => {
-  res.sendFile(path.join(__dirname, path_av + 'tablaVendedores.html'));
-});
-app.get('/useraccount', (req, res) => {
-  res.sendFile(path.join(__dirname, path_av + 'userAccount.html'));
-});
-
-// Rutas de los archivos Cliente
-const path_c = '/autocom/Cliente/';
-app.get('/financiamiento1', (req, res) => {
-  res.sendFile(path.join(__dirname, path_c + 'financiamientoParte1.html'));
-});
-app.get('/financiamiento2', (req, res) => {
-  res.sendFile(path.join(__dirname, path_c + 'financiamientoParte2.html'));
-});
-app.get('/financiamiento3', (req, res) => {
-  res.sendFile(path.join(__dirname, path_c + 'financiamientoParte3.html'));
-});
 
 app.listen(process.env.PORT || 3000, () => {
   console.log('Servidor en funcionamiento...');
 });
+//     });
