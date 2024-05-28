@@ -42,7 +42,9 @@ app.use(cors);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", index);
+app.get("/", (req, res) => {
+  res.redirect("/home"); // Añade esta línea para redirigir de "/" a "/home"
+});
 app.use("/user", user);
 app.use("/catalogo", catalogoRouter);
 app.use("/catalogoCliente", catalogoCliente);

@@ -3,6 +3,8 @@ const router = express.Router();
 const mysql = require('mysql2');
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
+const os = require('os');
+const path = require('path');
 
 // Configuración de la conexión a la base de datos
 const pool = mysql.createPool({
@@ -46,9 +48,13 @@ router.get('/verFinanciamiento', (req, res) => {
     const mensualidades = parseInt(financiamiento.Mensualidad, 10);
     const mensualidad = montoFinanciar / mensualidades;
 
+    function userDownloadsPath() {
+  return path.join(os.homedir(), 'Downloads');
+}
+
     // Crear el documento PDF
     const doc = new PDFDocument();
-    const filePath = `./pdfs/financiamiento_${idFinanciamiento}.pdf`;
+    const filePath = `${userDownloadsPath()}/financiamiento_${idFinanciamiento}.pdf`;
 
     doc.pipe(fs.createWriteStream(filePath));
 
