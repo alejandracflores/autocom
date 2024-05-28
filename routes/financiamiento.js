@@ -89,12 +89,17 @@ router.post("/procesarFinanciamiento", (req, res) => {
       console.error("Error en la consulta SQL:", error.message);
       return res.status(500).json({ error: error.message });
     }
-    res
-      .status(200)
-      .json({
-        message: "Financiamiento procesado y guardado con éxito",
-        idFinanciamiento: results.insertId,
-      });
+
+    // Verificar si el ID de financiamiento se ha insertado correctamente
+    if (results && results.insertId) {
+      const idFinanciamiento = results.insertId;
+      return res.status(200).json({ idFinanciamiento });
+    } else {
+      console.error("No se pudo obtener el ID del financiamiento");
+      return res
+        .status(500)
+        .json({ error: "No se pudo obtener el ID del financiamiento" });
+    }
   });
 });
 
