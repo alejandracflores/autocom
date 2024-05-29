@@ -292,7 +292,6 @@
                 idVehiculo,
                 idCliente
             };
-
             fetch('/procesarFinanciamiento', {
                 method: 'POST',
                 headers: {
@@ -301,13 +300,17 @@
                 body: JSON.stringify(data)
             })
                 .then(response => response.json())
-                .then(data => {
-                    console.log('Success:', data);
-                    alert('Financiamiento generado exitosamente');
+                .then(response => {
+                    console.log("Respuesta del servidor:", response);  // Agrega esta línea para depurar
+                    if (response.idFinanciamiento) {
+                        window.location.href = `/financiamiento2?idFinanciamiento=${response.idFinanciamiento}`;
+                    } else {
+                        throw new Error('ID de financiamiento no recibido.');
+                    }
                 })
                 .catch((error) => {
                     console.error('Error:', error);
-                    alert('Error al generar el financiamiento');
+                    alert('Error al generar el financiamiento: ' + error.message);
                 });
         });
     </script>

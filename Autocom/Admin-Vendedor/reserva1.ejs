@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../output.css">
+    <title>Reserva P1</title>
+</head>
+
+<body class="flex flex-col py-[52px] px-20 w-full justify-center">
+    <header>
+        <h1 class="font-sans text-5xl font-bold mb-3">Confirmación de Reserva</h1>
+        <p class="text-xl font-normal max-w-[557px]">Confirma tus datos para proceder con la reserva.</p>
+    </header>
+
+    <form class="flex w-full flex-wrap gap-10 mt-11 mb-10 justify-start text-gray-500 items-center"
+        action="/confirmarReserva" method="post">
+        <label class="font-bold flex flex-col" for="nombre">Nombre (s)
+            <input class="bg-[#F3F3F3] rounded-[10px] w-[370px] h-[62px] px-10 py-2" type="text" id="nombre"
+                name="nombre"
+                value="<%= financiamiento.Nombre %> <%= financiamiento.ApellidoPaterno %> <%= financiamiento.ApellidoMaterno %>"
+                readonly>
+        </label>
+
+        <label class="font-bold flex flex-col" for="telefono">Teléfono
+            <input class="bg-[#F3F3F3] rounded-[10px] w-[370px] h-[62px] px-10 py-2" type="text" id="telefono"
+                name="telefono" value="<%= financiamiento.Telefono %>" readonly>
+        </label>
+
+        <label class="font-bold flex flex-col" for="email">Correo Electrónico
+            <input class="bg-[#F3F3F3] rounded-[10px] w-[370px] h-[62px] px-10 py-2" type="email" id="email"
+                name="email" value="<%= financiamiento.Correo %>" readonly>
+        </label>
+
+        <label class="font-bold flex flex-col" for="direccion">Dirección
+            <input class="bg-[#F3F3F3] rounded-[10px] w-[370px] h-[62px] px-10 py-2" type="text" id="direccion"
+                name="direccion" placeholder="Introduce tu dirección">
+        </label>
+
+        <label class="font-bold flex flex-col" for="genero">Género
+            <select class="bg-[#F3F3F3] rounded-[10px] w-[370px] h-[62px] px-10 py-2" id="genero" name="genero">
+                <option value="Hombre" <%=financiamiento.Genero==='Hombre' ? 'selected' : '' %>>Hombre</option>
+                <option value="Mujer" <%=financiamiento.Genero==='Mujer' ? 'selected' : '' %>>Mujer</option>
+            </select>
+        </label>
+
+        <label class="font-bold flex flex-col" for="edad">Edad
+            <input class="bg-[#F3F3F3] rounded-[10px] w-[370px] h-[62px] px-10 py-2" type="number" id="edad" name="edad"
+                placeholder="Ingresa tu edad">
+        </label>
+
+        <div class="w-full flex justify-center">
+            <button class="bg-[#9A9A9A] py-5 px-16 rounded-lg font-bold text-gray-50 mr-10 hover:bg-slate-900"
+                type="button" onclick="window.location.href='/';">Cancelar</button>
+            <button class="bg-[#FF002E] py-5 px-12 rounded-lg font-bold text-gray-50 hover:bg-red-400"
+                type="submit">Confirmar Reserva</button>
+        </div>
+    </form>
+</body>
+
+</html>
