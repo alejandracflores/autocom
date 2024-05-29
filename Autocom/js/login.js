@@ -24,7 +24,7 @@ function login() {
             if (res.data.isAdmin === 1) {
                 window.location.href = "http://localhost:3000/tablavendedores";
             } else {
-                window.location.href = "http://localhost:3000/";
+                window.location.href = "http://localhost:3000/catalogo";
             }
         }
         else {
