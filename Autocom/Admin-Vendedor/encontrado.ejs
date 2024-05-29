@@ -75,7 +75,7 @@
                   </div>
                   </div>
                   <div class="buttons row g-0">
-                    <div class="btn btn-danger" type="button">Reservar vehículo</div>
+                    <div class="btn btn-danger btn-reservar" data-id="<%= catalogo[i].idVehiculo %>" type="button">Reservar vehículo</div>
                     <button class="btn btn-secondary btn-detalles" data-id="<%= catalogo[i].idVehiculo %>" type="button" data-bs-toggle="modal" data-bs-target="#detallesModal">Detalles</button>
                   </div>
                 </div>
@@ -85,7 +85,7 @@
       <% } %>
       <div class="col-md-12 mt-3 text-center">
         <a href="/catalogo" type="button" class="btn btn-danger">Volver al Catálogo General</a>
-    </div>
+      </div>
     <% } %>
   </div>
 
@@ -116,13 +116,27 @@
             .then(response => response.text())
             .then(html => {
               document.getElementById('detalles-container').innerHTML = html;
+              // Asociar los eventos de clic a los botones dentro del modal después de que se cargue el contenido
+              document.querySelectorAll('.btn-financiamiento, .btn-reservar').forEach(button => {
+                button.addEventListener('click', function () {
+                  const idVehiculo = this.getAttribute('data-id');
+                  window.location.href = `/financiamiento1?idVehiculo=${idVehiculo}`;
+                });
+              });
             })
             .catch(error => console.error('Error al cargar los detalles del vehículo:', error));
         });
       });
+
+      document.querySelectorAll('.btn-reservar').forEach(button => {
+        button.addEventListener('click', function () {
+          const idVehiculo = this.getAttribute('data-id');
+          window.location.href = `/financiamiento1?idVehiculo=${idVehiculo}`;
+        });
+      });
     });
   </script>
-  
+
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

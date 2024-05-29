@@ -61,8 +61,8 @@
                       </div>
                   </div>
                   <div class="buttons">
-                      <div class="btn btn-secondary">Obtener financiamiento</div>
-                      <div class="btn btn-danger">Reservar vehículo</div>
+                      <div class="btn btn-secondary btn-financiamiento" type="button" data-id="<%= vehiculo.idVehiculo %>">Obtener financiamiento</div>
+                      <div class="btn btn-danger btn-reservar" type="button" data-id="<%= vehiculo.idVehiculo %>">Reservar vehículo</div>
                   </div>
               </div>
           </div>
@@ -164,6 +164,16 @@
           </div>
       </div>
   </div>  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.btn-financiamiento, .btn-reservar').forEach(button=>{
+            button.addEventListener('click', function(){
+                const idVehiculo=this.getAttribute('data-id');
+                window.location.href=`/financamiento1?idVehiculo=${idVehiculo}`;
+            });
+        });
+    });
+  </script>
     </body>
     </html>
     

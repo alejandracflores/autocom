@@ -97,7 +97,6 @@
                 </button>
             </div>
             <div class="modal-body" id="detalles-container">
-                <!-- Los detalles del vehículo se cargarán aquí -->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location.reload()">Cerrar</button>
@@ -108,24 +107,31 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Función para mostrar los detalles de un vehículo
             const mostrarDetalles = (idVehiculo) => {
                 fetch(`/catalogoCliente/detalles/${idVehiculo}`)
                     .then(response => response.text())
                     .then(html => {
                         document.getElementById('detalles-container').innerHTML = html;
+
+                        // Asocia el evento de clic para el botón de financiamiento en el modal
+                        const financiamientoButton = document.querySelector('.btn-financiamiento');
+                        if (financiamientoButton) {
+                            const idVehiculo = financiamientoButton.getAttribute('data-id');
+                            financiamientoButton.addEventListener('click', () => {
+                                window.location.href = `/financiamiento1?idVehiculo=${idVehiculo}`;
+                            });
+                        }
                     })
                     .catch(error => console.error('Error al cargar los detalles del vehículo:', error));
             };
-    
-            // Asignar evento click a los botones de detalles
+
             document.querySelectorAll('.details-button').forEach(button => {
                 button.addEventListener('click', function () {
                     const idVehiculo = this.getAttribute('data-id');
                     mostrarDetalles(idVehiculo);
                 });
             });
-    
+
             // Obtener el ID del vehículo si se realiza una búsqueda exitosa y mostrar sus detalles
             const urlParams = new URLSearchParams(window.location.search);
             const query = urlParams.get('query');
@@ -148,6 +154,5 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
 </body>
 </html>
