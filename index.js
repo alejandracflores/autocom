@@ -22,9 +22,10 @@ const catalogoRouter = require("./routes/catalogo");
 const catalogoCliente = require("./routes/catalogoC");
 const financiamientoRoutes = require("./routes/financiamiento");
 const generarFinanciamiento = require("./routes/generarFinanciamiento");
-const reservaRoutes = require("./routes/reserva");  // Importa el archivo de rutas de reserva
 
 // Middlewares
+// const auth = require('./middleware/auth');
+// const notFound = require('./middleware/notFound');
 const index = require("./middleware/index");
 const cors = require("./middleware/cors");
 
@@ -42,14 +43,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.redirect("/home");
+  res.redirect("/home"); // Añade esta línea para redirigir de "/" a "/home"
 });
 app.use("/user", user);
 app.use("/catalogo", catalogoRouter);
 app.use("/catalogoCliente", catalogoCliente);
 app.use("/", financiamientoRoutes);
-app.use("/", generarFinanciamiento);
-app.use("/", reservaRoutes);  // Usa las rutas de reserva
+app.use("/", generarFinanciamiento); // Aquí se define la ruta para generarFinanciamiento
+// app.use(auth);
+// app.use(notFound);
 
 // Archivos estáticos
 app.use(express.static("autocom"));
@@ -71,6 +73,16 @@ app.get("/agregarvendedor", (req, res) => {
 app.get("/editarvendedor", (req, res) => {
   res.sendFile(path.join(__dirname, path_av + "editarVendedor.html"));
 });
+app.get("/financiamiento2", (req, res) => {
+  const idFinanciamiento = req.query.idFinanciamiento;
+  res.render("financiamientoParte2", { idFinanciamiento: idFinanciamiento });
+});
+app.get("/financiamiento3", (req, res) => {
+  res.sendFile(path.join(__dirname, path_av + "financiamientoParte3.html"));
+});
+app.get("/reserva1", (req, res) => {
+  res.sendFile(path.join(__dirname, path_av + "reservaP1.html"));
+});
 app.get("/tablavendedores", (req, res) => {
   res.sendFile(path.join(__dirname, path_av + "tablaVendedores.html"));
 });
@@ -78,6 +90,8 @@ app.get("/useraccount", (req, res) => {
   res.sendFile(path.join(__dirname, path_av + "userAccount.html"));
 });
 
+// Rutas de los archivos Cliente
+const path_c = "/autocom/Cliente/";
 app.get("/financiamiento1", (req, res) => {
   const idVehiculo = req.query.idVehiculo;
   pool.query(
@@ -94,29 +108,6 @@ app.get("/financiamiento1", (req, res) => {
 app.get("/financiamiento2", (req, res) => {
   const idFinanciamiento = req.query.idFinanciamiento;
   res.render("financiamientoParte2", { idFinanciamiento: idFinanciamiento });
-});
-
-app.get("/reserva1", (req, res) => {
-  const idFinanciamiento = req.query.idFinanciamiento;
-  pool.query(
-    "SELECT * FROM financiamiento WHERE idFinanciamiento = ?",
-    [idFinanciamiento],
-    (err, results) => {
-      if (err || results.length === 0) {
-        return res
-          .status(404)
-          .send("Financiamiento no encontrado o error de base de datos.");
-      }
-      res.render("reserva1", { financiamiento: results[0] });
-    }
-  );
-});
-
-// Rutas de los archivos Cliente
-const path_c = "/autocom/Cliente/";
-
-app.get("/catalogoCliente", (req, res) => {
-  res.sendFile(path.join(__dirname, path_c + "catalogoCliente.html"));
 });
 
 app.listen(process.env.PORT || 3000, () => {
