@@ -34,21 +34,6 @@
         <button class="bg-black py-5 px-7 rounded-lg text-white font-bold text-3xl">Volver al inicio</button>
     </footer>
 </body>
-<script>
-    window.onload = function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        const isDownloadSuccess = urlParams.has('idFinanciamiento');
-
-        if (isDownloadSuccess) {
-            Swal.fire({
-                title: 'Éxito',
-                text: 'El archivo de financiamiento ha sido descargado exitosamente.',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        }
-    };
-</script>
 
 <script>
     function verFinanciamiento(idFinanciamiento) {

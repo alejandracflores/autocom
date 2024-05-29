@@ -6,6 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../output.css">
     <title>Reserva P1</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector("form").addEventListener("submit", function (e) {
+                e.preventDefault(); // Evita la acción por defecto del formulario
+
+                const data = {
+                    nombre: document.getElementById("nombre").value,
+                    telefono: document.getElementById("telefono").value,
+                    email: document.getElementById("email").value,
+                    direccion: document.getElementById("direccion").value,
+                    genero: document.getElementById("genero").value,
+                    edad: document.getElementById("edad").value
+                };
+
+                fetch("/confirmarReserva", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Error en la respuesta del servidor");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.idCliente) {
+                        window.location.href = `/reservaP2?idCliente=${data.idCliente}`;
+                    } else {
+                        throw new Error("ID de cliente no recibido");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error al confirmar la reserva:", error);
+                    alert("Error al confirmar la reserva: " + error.message);
+                });
+            });
+        });
+    </script>
 </head>
 
 <body class="flex flex-col py-[52px] px-20 w-full justify-center">
@@ -14,8 +55,7 @@
         <p class="text-xl font-normal max-w-[557px]">Confirma tus datos para proceder con la reserva.</p>
     </header>
 
-    <form class="flex w-full flex-wrap gap-10 mt-11 mb-10 justify-start text-gray-500 items-center"
-        action="/confirmarReserva" method="post">
+    <form class="flex w-full flex-wrap gap-10 mt-11 mb-10 justify-start text-gray-500 items-center">
         <label class="font-bold flex flex-col" for="nombre">Nombre (s)
             <input class="bg-[#F3F3F3] rounded-[10px] w-[370px] h-[62px] px-10 py-2" type="text" id="nombre"
                 name="nombre"
@@ -52,7 +92,7 @@
 
         <div class="w-full flex justify-center">
             <button class="bg-[#9A9A9A] py-5 px-16 rounded-lg font-bold text-gray-50 mr-10 hover:bg-slate-900"
-                type="button" onclick="window.location.href='/';">Cancelar</button>
+                type="button" onclick="window.location.href='/catalogo';">Cancelar</button>
             <button class="bg-[#FF002E] py-5 px-12 rounded-lg font-bold text-gray-50 hover:bg-red-400"
                 type="submit">Confirmar Reserva</button>
         </div>
