@@ -22,7 +22,8 @@ const catalogoRouter = require("./routes/catalogo");
 const catalogoCliente = require("./routes/catalogoC");
 const financiamientoRoutes = require("./routes/financiamiento");
 const generarFinanciamiento = require("./routes/generarFinanciamiento");
-const reservaRoutes = require("./routes/reserva");  // Importa el archivo de rutas de reserva
+const reservaRoutes = require("./routes/reserva");
+const ticketReservaRoutes = require("./routes/ticketReserva");
 
 // Middlewares
 const index = require("./middleware/index");
@@ -41,26 +42,31 @@ app.use(cors);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Agregar logs para depuración
+app.use((req, res, next) => {
+  console.log(`Solicitud: ${req.method} ${req.url}`);
+  next();
+});
+
 app.get("/", (req, res) => {
   res.redirect("/home");
 });
+
 app.use("/user", user);
 app.use("/catalogo", catalogoRouter);
 app.use("/catalogoCliente", catalogoCliente);
 app.use("/", financiamientoRoutes);
 app.use("/", generarFinanciamiento);
-app.use("/", reservaRoutes);  // Usa las rutas de reserva
+app.use("/", reservaRoutes);
+app.use("/", ticketReservaRoutes);
 
-// Archivos estáticos
 app.use(express.static("autocom"));
 app.use(express.static(path.join(__dirname, "Autocom")));
 
-// Ruta Index
 app.get("/home", (req, res) => {
   res.sendFile(path.join(__dirname, "/autocom/autocom.html"));
 });
 
-// Rutas de los archivos Admin-Vendedor
 const path_av = "/autocom/Admin-Vendedor/";
 app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, path_av + "login.html"));
@@ -91,6 +97,7 @@ app.get("/financiamiento1", (req, res) => {
     }
   );
 });
+
 app.get("/financiamiento2", (req, res) => {
   const idFinanciamiento = req.query.idFinanciamiento;
   res.render("financiamientoParte2", { idFinanciamiento: idFinanciamiento });
@@ -112,13 +119,23 @@ app.get("/reserva1", (req, res) => {
   );
 });
 
-// Rutas de los archivos Cliente
-const path_c = "/autocom/Cliente/";
-
-app.get("/catalogoCliente", (req, res) => {
-  res.sendFile(path.join(__dirname, path_c + "catalogoCliente.html"));
+app.get("/reservaP2", (req, res) => {
+  const idCliente = req.query.idCliente;
+  pool.query(
+    "SELECT * FROM clientes WHERE idCliente = ?",
+    [idCliente],
+    (err, results) => {
+      if (err || results.length === 0) {
+        return res
+          .status(404)
+          .send("Cliente no encontrado o error de base de datos.");
+      }
+      res.render("reservaP2", { cliente: results[0], idCliente: idCliente });
+    }
+  );
 });
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("Servidor en funcionamiento...");
 });
+// Path: middleware/cors.js

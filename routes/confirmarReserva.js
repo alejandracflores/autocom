@@ -17,8 +17,7 @@ const pool = mysql.createPool({
 router.post("/confirmarReserva", (req, res) => {
   const { nombre, telefono, email, direccion, genero, edad } = req.body;
 
-  const sql =
-    "INSERT INTO clientes (Nombre, Direccion, Telefono, Correo, Genero, Edad) VALUES (?, ?, ?, ?, ?, ?)";
+  const sql = "INSERT INTO clientes (Nombre, Direccion, Telefono, Correo, Genero, Edad) VALUES (?, ?, ?, ?, ?, ?)";
   const values = [nombre, direccion, telefono, email, genero, edad];
 
   pool.query(sql, values, (err, results) => {
@@ -26,7 +25,8 @@ router.post("/confirmarReserva", (req, res) => {
       console.error("Error al insertar en la base de datos:", err);
       return res.status(500).json({ error: "Error al confirmar la reserva" });
     }
-    res.status(200).json({ idCliente: results.insertId });
+    const idCliente = results.insertId;
+    res.json({ idCliente });
   });
 });
 

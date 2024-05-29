@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../output.css">
     <title>Reserva Parte 2</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="w-full px-10 py-[52px]">
@@ -26,14 +27,12 @@
         </div>
     </main>
     <footer class="flex justify-around mt-20">
-        <button class="bg-[#FF002E] py-5 px-7 rounded-lg text-white font-bold text-3xl">Descargalo aquí</button>
-        <button class="bg-[#7c7c7c] py-5 px-7 rounded-lg text-white font-bold text-3xl"
-            >Ver financiamiento</button>
-        <button class="bg-black py-5 px-7 rounded-lg text-white font-bold text-3xl">Volver al inicio</button>
+        <button class="bg-[#FF002E] py-5 px-7 rounded-lg text-white font-bold text-3xl"
+            onclick="window.location.href=`/generarTicket?idCliente=<%= idCliente %>&download=true`">Descárgalo
+            aquí</button>
+        <button class="bg-black py-5 px-7 rounded-lg text-white font-bold text-3xl"
+            onclick="window.location.href='/catalogo'">Volver al inicio</button>
     </footer>
 </body>
-<script>
-
-</script>
 
 </html>
