@@ -117,7 +117,13 @@
                     .then(response => response.text())
                     .then(html => {
                         document.getElementById('detalles-container').innerHTML = html;
-                    })
+                        document.querySelectorAll('.btn-financiamiento').forEach(button =>{
+                            button.addEventListener('click',function(){
+                                const idVehiculo = this.getAttribute('data-id');
+                                window.location.href=`/financiamiento1?idVehiculo=${idVehiculo}`;
+                            });
+                        });
+                    }) // Quité el punto y coma de aquí
                     .catch(error => console.error('Error al cargar los detalles del vehículo:', error));
             };
     
@@ -146,7 +152,8 @@
                     .catch(error => console.error('Error al cargar los resultados de búsqueda:', error));
             }
         });
-    </script>    
+    </script>
+       
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
