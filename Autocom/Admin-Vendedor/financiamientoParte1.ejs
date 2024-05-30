@@ -68,7 +68,7 @@
         </section>
 
         <section class="flex flex-col items-center justify-start">
-            <img class="max-w-[302px] mb-[74px]" src="../img/carro1.png" alt="modelo de carro">
+            <img class="max-w-[302px] mb-[74px]" src="../img/vehiculos/001.png" alt="modelo de carro">
             <div>
                 <label class="font-bold" for="Seguro">Seguro
                     <select class="bg-[#F3F3F3] rounded-[10px] w-full h-[62px] px-10 py-2" name="Seguro" id="Seguro">
@@ -267,8 +267,10 @@
             const regimenFiscal = document.getElementById('regimenFiscal').value;
             const fuenteIngresos = document.getElementById('fuenteIngresos').value;
             const ingresoNeto = document.getElementById('ingresoNeto').value;
-            const idVehiculo = 1; // Asegúrate de obtener o definir el ID del vehículo correctamente
-            const idCliente = 1; // Asegúrate de obtener o definir el ID del cliente correctamente
+
+            // Obtener idVehiculo desde la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const idVehiculo = urlParams.get('idVehiculo');
 
             const data = {
                 valorVehiculo,
@@ -289,9 +291,9 @@
                 regimenFiscal,
                 fuenteIngresos,
                 ingresoNeto,
-                idVehiculo,
-                idCliente
+                idVehiculo
             };
+
             fetch('/procesarFinanciamiento', {
                 method: 'POST',
                 headers: {
