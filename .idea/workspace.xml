@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="608caf3b-cb3f-4050-bd5b-c2c264ac59a5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Autocom/Admin-Vendedor/reserva1.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Autocom/Admin-Vendedor/reserva1.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/eab722d7-a2b7-4203-b206-d47d5ed86eb0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/eab722d7-a2b7-4203-b206-d47d5ed86eb0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/generarFinanciamiento.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/generarFinanciamiento.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +31,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenDatabaseViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;resv&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/pedro&quot;
   },
   &quot;keyToStringList&quot;: {

@@ -24,7 +24,10 @@ const financiamientoRoutes = require("./routes/financiamiento");
 const generarFinanciamiento = require("./routes/generarFinanciamiento");
 const reservaRoutes = require("./routes/reserva");
 const ticketReservaRoutes = require("./routes/ticketReserva");
-const registrarReservaRouter = require("./routes/registrarReserva"); // Asegúrate de incluir esto
+const registrarReservaRouter = require("./routes/registrarReserva"); 
+const ventasRouter = require("./routes/ventas"); 
+const generarTicketReservaRouter = require("./routes/generarTicketReserva"); 
+
 
 // Middlewares
 const index = require("./middleware/index");
@@ -60,7 +63,10 @@ app.use("/", financiamientoRoutes);
 app.use("/", generarFinanciamiento);
 app.use("/", reservaRoutes);
 app.use("/", ticketReservaRoutes);
-app.use("/", registrarReservaRouter); // Asegúrate de incluir esto
+app.use("/", registrarReservaRouter);
+app.use("/", ventasRouter);
+app.use("/", generarTicketReservaRouter);
+
 
 app.use(express.static("autocom"));
 app.use(express.static(path.join(__dirname, "Autocom")));
