@@ -32,7 +32,7 @@
                             document.getElementById('foto-perfil').src = fotoPerfil;
                         } else {
                             // Si no hay ningún valor en localStorage, establecer una imagen predeterminada
-                            document.getElementById('foto-perfil').src = 'nothing.png';
+                            document.getElementById('foto-perfil').src = '../img/usuarios/1.png';
                         }
                     </script>
                     <h1 class="text-5xl font-bold ml-4">Bienvenido <br>Jorge</h1>
@@ -44,20 +44,18 @@
 
                     <div class="grid-cols-1 mt-4">
                         <div>
-                            <h3 class="text-gray-500">ID de empleado:</h3>
-                            <p id="id-perfil"></p>
+                            <span class="text-gray-500">ID de empleado: <p id="id-perfil"></p></span>
                         </div>
                         <div>
-                            <h3 class="text-gray-500">Nombre:</h3>
-                            <p id="nombre-perfil"></p>
+                            <span class="text-gray-500">Nombre: <p id="nombre-perfil"></p></span>
+                            
                         </div>
                         <div>
-                            <h3 class="text-gray-500">Apellido:</h3>
-                            <p id="apellido-perfil"></p>
+                            <span class="text-gray-500">Apellido: <p id="apellido-perfil"></p></span>
+                            
                         </div>
                         <div>
-                            <h3 class="text-gray-500">Nombre de usuario:</h3>
-                            <p id="username-perfil"></p>
+                            <span class="text-gray-500">Nombre de usuario: <p id="username-perfil"></p></span>
                         </div>
                     </div>
                 </div>
@@ -66,8 +64,24 @@
         </main>
         
         <footer class="flex justify-around mt-20">
-            <button class="bg-[#FF002E] py-6 px-10 rounded-lg text-white font-bold text-2xl">Cerrar sesión</button>
+            <button id="logout" class="bg-[#FF002E] py-8 px-10 rounded-lg text-white font-bold text-2xl">Cerrar sesión</button>
         </footer>
         
 </body>
+<style>
+    span{
+        font-weight: bold;
+        font-size: 1.5rem;
+        display: flex;
+    }
+    p{
+        font-weight: bold;
+        color: black;
+
+    }
+    #logout{
+        width: 300px;
+        height: 50px;
+    }
+</style>
 </html>
