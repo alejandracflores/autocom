@@ -123,10 +123,15 @@
         <div class="w-full flex justify-center">
             <button class="bg-[#9A9A9A] py-5 px-16 rounded-lg font-bold text-gray-50 mr-10 hover:bg-slate-900"
                 type="button" onclick="window.location.href='/catalogo';">Cancelar</button>
-            <button class="bg-[#FF002E] py-5 px-12 rounded-lg font-bold text-gray-50 hover:bg-red-400"
+            <button onclick="volverInicio()" class="bg-[#FF002E] py-5 px-12 rounded-lg font-bold text-gray-50 hover:bg-red-400"
                 type="submit">Confirmar Reserva</button>
         </div>
     </form>
 </body>
+    <script>
+        function volverInicio() {
+        window.location.href = '/catalogo';
+    }
+    </script>
 
 </html>
