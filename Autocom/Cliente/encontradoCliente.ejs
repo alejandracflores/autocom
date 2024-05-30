@@ -16,7 +16,7 @@
 <body>
     <!-- ******** NAVBAR *********-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/catalogoCliente">
           <img class="logo" src="../img/logoAutocom.png" alt="Logo">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -120,7 +120,7 @@
                         document.querySelectorAll('.btn-financiamiento').forEach(button =>{
                             button.addEventListener('click',function(){
                                 const idVehiculo = this.getAttribute('data-id');
-                                window.location.href=`/financiamiento1?idVehiculo=${idVehiculo}`;
+                                window.location.href=`/financiamiento1Clientes?idVehiculo=${idVehiculo}`;
                             });
                         });
                     }) // Quité el punto y coma de aquí

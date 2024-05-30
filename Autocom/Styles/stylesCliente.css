@@ -6,6 +6,7 @@
 
 .card-body {
     background-color: #f8f9fa;
+    justify-content: space-between;
 }
 
 .card-img-top {
@@ -50,9 +51,7 @@
     color: gray;
 }
 
-.wrap .right{
-    margin-left: 150px;
-}
+
 .textModel {
     color: #868686;
     text-align: left;
@@ -87,5 +86,9 @@
 }
 .containerPrice{
     row-gap: 60px;
-    margin-left: 63px;
+}
+
+.row{
+    width: 100%;
+    justify-content: space-between;
 }

@@ -16,7 +16,7 @@
 <body>
     <!-- ******** NAVBAR *********-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/home">
           <img class="logo" src="../img/logoAutocom.png" alt="Logo">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,8 +44,8 @@
                     <div class="card card-custom">
                         <img src="<%= vehiculo.imagenVehiculo %>" class="card-img-top" alt="<%= vehiculo.Marca %>">
                         <div class="card-body">
-                            <div class="wrap row g-0">
-                                <div class="col-ml-6">
+                            <div class="wrap row g-0 group1">
+                                <div class="col-ml-6 mx-1">
                                 <h5 class="card-title"><%= vehiculo.Marca %></h5>
                                 <h6 class="card-subtitle mb-2 text-muted"><%= vehiculo.Año %></h6>
                             </div>
@@ -118,7 +118,7 @@
                         if (financiamientoButton) {
                             const idVehiculo = financiamientoButton.getAttribute('data-id');
                             financiamientoButton.addEventListener('click', () => {
-                                window.location.href = `/financiamiento1?idVehiculo=${idVehiculo}`;
+                                window.location.href = `/financiamiento1Clientes?idVehiculo=${idVehiculo}`;
                             });
                         }
                     })
