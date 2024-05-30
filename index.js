@@ -24,6 +24,7 @@ const financiamientoRoutes = require("./routes/financiamiento");
 const generarFinanciamiento = require("./routes/generarFinanciamiento");
 const reservaRoutes = require("./routes/reserva");
 const ticketReservaRoutes = require("./routes/ticketReserva");
+const registrarReservaRouter = require("./routes/registrarReserva"); // Asegúrate de incluir esto
 
 // Middlewares
 const index = require("./middleware/index");
@@ -59,6 +60,7 @@ app.use("/", financiamientoRoutes);
 app.use("/", generarFinanciamiento);
 app.use("/", reservaRoutes);
 app.use("/", ticketReservaRoutes);
+app.use("/", registrarReservaRouter); // Asegúrate de incluir esto
 
 app.use(express.static("autocom"));
 app.use(express.static(path.join(__dirname, "Autocom")));
@@ -121,6 +123,7 @@ app.get("/reserva1", (req, res) => {
 
 app.get("/reservaP2", (req, res) => {
   const idCliente = req.query.idCliente;
+  const idFinanciamiento = req.query.idFinanciamiento;
   pool.query(
     "SELECT * FROM clientes WHERE idCliente = ?",
     [idCliente],
@@ -130,7 +133,11 @@ app.get("/reservaP2", (req, res) => {
           .status(404)
           .send("Cliente no encontrado o error de base de datos.");
       }
-      res.render("reservaP2", { cliente: results[0], idCliente: idCliente });
+      res.render("reservaP2", {
+        cliente: results[0],
+        idCliente: idCliente,
+        idFinanciamiento: idFinanciamiento,
+      });
     }
   );
 });
@@ -138,4 +145,3 @@ app.get("/reservaP2", (req, res) => {
 app.listen(process.env.PORT || 3000, () => {
   console.log("Servidor en funcionamiento...");
 });
-// Path: middleware/cors.js
