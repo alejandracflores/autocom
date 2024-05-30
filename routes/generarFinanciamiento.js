@@ -91,7 +91,6 @@ router.get("/verFinanciamiento", (req, res) => {
             ["Estado de Nacimiento", financiamiento.EstadoNacimiento],
             ["Régimen Fiscal", financiamiento.RegimenFiscal],
             ["Fuente de Ingresos", financiamiento.FuenteIngresos],
-            ["Sexo", financiamiento.Genero],
             ["Ingreso Neto", financiamiento.IngresoNeto],
           ];
 
@@ -99,9 +98,12 @@ router.get("/verFinanciamiento", (req, res) => {
           let startY = 260;
           clientData.forEach(([key, value], index) => {
             if (index % 2 === 0) {
-              doc.rect(50, startY - 5, 500, 20).fill('#f0f0f0').stroke();
+              doc
+                .rect(50, startY - 5, 500, 20)
+                .fill("#f0f0f0")
+                .stroke();
             }
-            doc.fillColor('black').text(key, 50, startY);
+            doc.fillColor("black").text(key, 50, startY);
             doc.text(value, 200, startY);
             startY += 20;
           });
@@ -125,9 +127,12 @@ router.get("/verFinanciamiento", (req, res) => {
           startY += 40;
           vehicleData.forEach(([key, value], index) => {
             if (index % 2 === 0) {
-              doc.rect(50, startY - 5, 500, 20).fill('#f0f0f0').stroke();
+              doc
+                .rect(50, startY - 5, 500, 20)
+                .fill("#f0f0f0")
+                .stroke();
             }
-            doc.fillColor('black').text(key, 50, startY);
+            doc.fillColor("black").text(key, 50, startY);
             doc.text(value, 200, startY);
             startY += 20;
           });
@@ -136,20 +141,40 @@ router.get("/verFinanciamiento", (req, res) => {
           doc.fontSize(16).text("Plan Financiero:", 50, startY + 20);
           doc.fontSize(12);
 
+          const precioTotal = (
+            parseFloat(financiamiento.valorVehiculo) +
+            (parseFloat(financiamiento.Seguro) / 12) *
+              0.05 *
+              parseFloat(financiamiento.valorVehiculo)
+          ).toFixed(2);
+
+          const aFinanciar = (
+            precioTotal - parseFloat(financiamiento.Enganche)
+          ).toFixed(2);
+          const mensualidad = (
+            aFinanciar / parseFloat(financiamiento.Mensualidad)
+          ).toFixed(2);
+
           // Tabla de plan financiero
           const financialPlanData = [
             ["Enganche", financiamiento.Enganche],
             ["Mensualidades", financiamiento.Mensualidad],
             ["Seguro", financiamiento.Seguro],
+            ["Precio Total", precioTotal],
+            ["Precio a financiar", aFinanciar],
+            ["Mensualidad", mensualidad],
           ];
 
           // Dibujar tabla de plan financiero
           startY += 40;
           financialPlanData.forEach(([key, value], index) => {
             if (index % 2 === 0) {
-              doc.rect(50, startY - 5, 500, 20).fill('#f0f0f0').stroke();
+              doc
+                .rect(50, startY - 5, 500, 20)
+                .fill("#f0f0f0")
+                .stroke();
             }
-            doc.fillColor('black').text(key, 50, startY);
+            doc.fillColor("black").text(key, 50, startY);
             doc.text(value, 200, startY);
             startY += 20;
           });
