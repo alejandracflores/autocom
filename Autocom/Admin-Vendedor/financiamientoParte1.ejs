@@ -217,7 +217,7 @@
     </main>
 
     <footer class="flex justify-around mt-20">
-        <button class="bg-gray-600 py-5 px-7 rounded-lg text-white font-bold text-3xl">Cancelar</button>
+        <button id="cancel" class="bg-gray-600 py-5 px-7 rounded-lg text-white font-bold text-3xl">Cancelar</button>
         <button id="btnGenerarFinanciamiento"
             class="bg-[#FF002E] px-32 rounded-lg text-white font-bold text-3xl">Generar Financiamiento</button>
     </footer>
@@ -240,6 +240,10 @@
                     this.closest('div').classList.add('bg-red-500', 'text-white');
                 }
             });
+        });
+
+        document.getElementById('cancel').addEventListener('click', function () {
+            window.location.href = '/catalogo';
         });
 
         document.getElementById('btnGenerarFinanciamiento').addEventListener('click', function () {

@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', function() {
+
 window.onload = init;
 
 function init() {
@@ -9,6 +11,12 @@ function init() {
         window.location.href = "http://localhost:3000/";
     }
 }
+
+document.getElementById('logout').addEventListener('click', function() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    window.location.href = "http://localhost:3000/";
+});
 
 function obtenerDatosEmpleado(id) {
     axios({
@@ -30,3 +38,4 @@ function obtenerDatosEmpleado(id) {
         alert("Error al obtener los datos de la cuenta. Por favor, inténtalo de nuevo");
     });
 }
+});
