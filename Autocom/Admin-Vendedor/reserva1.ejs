@@ -8,42 +8,72 @@
     <title>Reserva P1</title>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const idFinanciamiento = urlParams.get("idFinanciamiento"); // Obtener idFinanciamiento desde la URL
+
+            if (!idFinanciamiento) {
+                console.error("idFinanciamiento no encontrado en la URL");
+                alert("Error: idFinanciamiento no encontrado");
+                return;
+            }
+
             document.querySelector("form").addEventListener("submit", function (e) {
                 e.preventDefault(); // Evita la acción por defecto del formulario
 
-                const data = {
+                const idEmpleado = localStorage.getItem("id"); // Obtener el ID del empleado desde el localStorage
+
+                const dataCliente = {
                     nombre: document.getElementById("nombre").value,
                     telefono: document.getElementById("telefono").value,
                     email: document.getElementById("email").value,
                     direccion: document.getElementById("direccion").value,
                     genero: document.getElementById("genero").value,
-                    edad: document.getElementById("edad").value
+                    edad: document.getElementById("edad").value,
+                    idEmpleado: idEmpleado, // Incluir el ID del empleado en los datos enviados
                 };
 
-                fetch("/confirmarReserva", {
+                // Primera llamada para confirmar el cliente
+                fetch(`/confirmarReserva`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify(data)
+                    body: JSON.stringify(dataCliente)
                 })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Error en la respuesta del servidor");
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.idCliente) {
-                        window.location.href = `/reservaP2?idCliente=${data.idCliente}`;
-                    } else {
-                        throw new Error("ID de cliente no recibido");
-                    }
-                })
-                .catch(error => {
-                    console.error("Error al confirmar la reserva:", error);
-                    alert("Error al confirmar la reserva: " + error.message);
-                });
+                    .then(response => response.json())
+                    .then(dataCliente => {
+                        if (dataCliente.idCliente) {
+                            const dataReserva = {
+                                idCliente: dataCliente.idCliente,
+                                idEmpleado: idEmpleado, // Reutilizar el ID del empleado obtenido del localStorage
+                            };
+
+                            console.log("Datos de reserva enviados:", dataReserva); // Agregar log
+
+                            // Segunda llamada para registrar la reserva
+                            return fetch(`/registrarReserva?idFinanciamiento=${idFinanciamiento}`, {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify(dataReserva)
+                            })
+                                .then(response => response.json())
+                                .then(dataReserva => {
+                                    if (dataReserva.success) {
+                                        window.location.href = `/reservaP2?idCliente=${dataCliente.idCliente}&idFinanciamiento=${idFinanciamiento}`;
+                                    } else {
+                                        throw new Error("La reserva no pudo ser registrada");
+                                    }
+                                });
+                        } else {
+                            throw new Error("ID de cliente no recibido");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error en el proceso:", error);
+                        alert("Error durante el proceso de reserva: " + error.message);
+                    });
             });
         });
     </script>
