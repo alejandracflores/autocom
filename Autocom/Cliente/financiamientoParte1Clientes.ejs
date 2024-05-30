@@ -29,7 +29,6 @@
                     <input class="hidden" type="radio" id="mensualidad12" name="mensualidad" value="12">
                     <label class="flex flex-col justify-center items-center w-full h-full" for="mensualidad12">
                         <p>12 meses</p>
-                        <p>$111,111</p>
                     </label>
                 </div>
                 <div
@@ -37,7 +36,6 @@
                     <input class="hidden" type="radio" id="mensualidad24" name="mensualidad" value="24">
                     <label class="flex flex-col justify-center items-center w-full h-full" for="mensualidad24">
                         <p>24 meses</p>
-                        <p>$111,111</p>
                     </label>
                 </div>
                 <div
@@ -45,7 +43,6 @@
                     <input class="hidden" type="radio" id="mensualidad48" name="mensualidad" value="48">
                     <label class="flex flex-col justify-center items-center w-full h-full" for="mensualidad48">
                         <p>48 meses</p>
-                        <p>$111,111</p>
                     </label>
                 </div>
                 <div
@@ -53,7 +50,6 @@
                     <input class="hidden" type="radio" id="mensualidad60" name="mensualidad" value="60">
                     <label class="flex flex-col justify-center items-center w-full h-full" for="mensualidad60">
                         <p>60 meses</p>
-                        <p>$111,111</p>
                     </label>
                 </div>
                 <div
@@ -61,14 +57,13 @@
                     <input class="hidden" type="radio" id="mensualidad72" name="mensualidad" value="72">
                     <label class="flex flex-col justify-center items-center w-full h-full" for="mensualidad72">
                         <p>72 meses</p>
-                        <p>$111,111</p>
                     </label>
                 </div>
             </article>
         </section>
 
         <section class="flex flex-col items-center justify-start">
-            <img class="max-w-[302px] mb-[74px]" src="../img/carro1.png" alt="modelo de carro">
+            <img class="max-w-[302px] mb-[74px]" src="../img/vehiculos/001.png" alt="modelo de carro">
             <div>
                 <label class="font-bold" for="Seguro">Seguro
                     <select class="bg-[#F3F3F3] rounded-[10px] w-full h-[62px] px-10 py-2" name="Seguro" id="Seguro">
@@ -222,7 +217,7 @@
     </main>
 
     <footer class="flex justify-around mt-20">
-        <button class="bg-gray-600 py-5 px-7 rounded-lg text-white font-bold text-3xl">Cancelar</button>
+        <button id="cancel" class="bg-gray-600 py-5 px-7 rounded-lg text-white font-bold text-3xl">Cancelar</button>
         <button id="btnGenerarFinanciamiento"
             class="bg-[#FF002E] px-32 rounded-lg text-white font-bold text-3xl">Generar Financiamiento</button>
     </footer>
@@ -247,6 +242,10 @@
             });
         });
 
+        document.getElementById('cancel').addEventListener('click', function () {
+            window.location.href = '/catalogo';
+        });
+
         document.getElementById('btnGenerarFinanciamiento').addEventListener('click', function () {
             const valorVehiculo = document.getElementById('valorVehiculo').value;
             const engancheVehiculo = document.getElementById('engancheVehiculo').value;
@@ -267,8 +266,10 @@
             const regimenFiscal = document.getElementById('regimenFiscal').value;
             const fuenteIngresos = document.getElementById('fuenteIngresos').value;
             const ingresoNeto = document.getElementById('ingresoNeto').value;
-            const idVehiculo = 1; // Asegúrate de obtener o definir el ID del vehículo correctamente
-            const idCliente = 1; // Asegúrate de obtener o definir el ID del cliente correctamente
+
+            // Obtener idVehiculo desde la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const idVehiculo = urlParams.get('idVehiculo');
 
             const data = {
                 valorVehiculo,
@@ -289,9 +290,9 @@
                 regimenFiscal,
                 fuenteIngresos,
                 ingresoNeto,
-                idVehiculo,
-                idCliente
+                idVehiculo
             };
+
             fetch('/procesarFinanciamiento', {
                 method: 'POST',
                 headers: {
@@ -303,7 +304,7 @@
                 .then(response => {
                     console.log("Respuesta del servidor:", response);  // Agrega esta línea para depurar
                     if (response.idFinanciamiento) {
-                        window.location.href = `/financiamiento2?idFinanciamiento=${response.idFinanciamiento}`;
+                        window.location.href = `/financiamiento2Clientes?idFinanciamiento=${response.idFinanciamiento}`;
                     } else {
                         throw new Error('ID de financiamiento no recibido.');
                     }

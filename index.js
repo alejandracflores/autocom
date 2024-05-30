@@ -148,6 +148,28 @@ app.get("/reservaP2", (req, res) => {
   );
 });
 
+
+// Rutas para el cliente
+app.get("/financiamiento1Clientes", (req, res) => {
+  const idVehiculo = req.query.idVehiculo;
+  pool.query(
+    "SELECT Precio FROM inventario WHERE idVehiculo = ?",
+    [idVehiculo],
+    (error, results) => {
+      if (error || results.length === 0) {
+        return res.status(404).json({ error: "Vehículo no encontrado" });
+      }
+      res.render("financiamientoParte1Clientes", { precio: results[0].Precio });
+    }
+  );
+});
+
+app.get("/financiamiento2Clientes", (req, res) => {
+  const idFinanciamiento = req.query.idFinanciamiento;
+  res.render("financiamientoParte2Clientes", { idFinanciamiento: idFinanciamiento });
+});
+
+
 app.listen(process.env.PORT || 3000, () => {
   console.log("Servidor en funcionamiento...");
 });
