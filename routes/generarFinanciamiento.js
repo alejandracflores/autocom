@@ -36,42 +36,142 @@ router.get("/verFinanciamiento", (req, res) => {
       }
 
       const financiamiento = results[0];
-      const filePath = path.join(os.homedir(), "Downloads", `financiamiento_${idFinanciamiento}.pdf`);
-      const doc = new PDFDocument({ margin: 50 });
 
-      const stream = fs.createWriteStream(filePath);
-      doc.pipe(stream);
-
-      // Detalle del financiamiento
-      doc.fontSize(20).text("Detalle de Financiamiento", { align: "center" });
-      doc.moveDown();
-      doc.fontSize(12)
-        .text(`Nombre: ${financiamiento.Nombre} ${financiamiento.ApellidoPaterno} ${financiamiento.ApellidoMaterno}`);
-      doc.text(`Teléfono: ${financiamiento.Telefono}`);
-      doc.text(`Correo Electrónico: ${financiamiento.Correo}`);
-      doc.text(`Enganche: ${financiamiento.Enganche}`);
-      doc.text(`Mensualidad: ${financiamiento.Mensualidad}`);
-      doc.text(`Género: ${financiamiento.Genero}`);
-      doc.text(`Estado de Nacimiento: ${financiamiento.EstadoNacimiento}`);
-      doc.text(`Régimen Fiscal: ${financiamiento.RegimenFiscal}`);
-      doc.text(`Fuente de Ingresos: ${financiamiento.FuenteIngresos}`);
-      doc.text(`CURP: ${financiamiento.Curp}`);
-      doc.text(`RFC: ${financiamiento.Rcf}`);
-      doc.text(`Ingreso Neto: ${financiamiento.IngresoNeto}`);
-      doc.text(`Seguro: ${financiamiento.Seguro}`);
-      doc.text(`Valor del Vehículo: ${financiamiento.valorVehiculo}`);
-
-      doc.end();  // Finalizar la escritura al PDF
-
-      stream.on("finish", () => {
-        res.download(filePath, `financiamiento_${idFinanciamiento}.pdf`, (err) => {
-          if (err) {
-            console.error("Error al descargar el PDF:", err);
-            return res.status(500).send("Error al descargar el PDF");
+      // Obtener datos del vehículo usando idVehiculo
+      pool.query(
+        "SELECT * FROM inventario WHERE idVehiculo = ?",
+        [financiamiento.idVehiculo],
+        (errorVehiculo, resultsVehiculo) => {
+          if (errorVehiculo) {
+            return res
+              .status(500)
+              .send("Error en la consulta a la base de datos del vehículo");
           }
-          fs.unlinkSync(filePath);  // Eliminar el archivo después de la descarga
-        });
-      });
+          if (resultsVehiculo.length === 0) {
+            return res.status(404).send("Vehículo no encontrado");
+          }
+
+          const vehiculo = resultsVehiculo[0];
+          const filePath = path.join(
+            os.homedir(),
+            "Downloads",
+            `financiamiento_${idFinanciamiento}.pdf`
+          );
+          const doc = new PDFDocument({ margin: 50 });
+
+          const stream = fs.createWriteStream(filePath);
+          doc.pipe(stream);
+
+          // Detalle del financiamiento
+          // Logo
+          doc.image("./Autocom/img/logoAutocom.png", 50, 50, { width: 150 });
+
+          // Título y folio
+          doc.fontSize(20).text("Financiamiento Automotriz", 50, 160);
+          doc
+            .fontSize(12)
+            .text(`Folio: ${financiamiento.idFinanciamiento}`, 50, 190);
+
+          // Fecha actual en la esquina superior derecha
+          const fechaActual = new Date().toLocaleDateString();
+          doc.fontSize(12).text(`Fecha: ${fechaActual}`, 450, 50);
+
+          // Datos del cliente
+          doc.fontSize(16).text("Datos del cliente", 50, 230);
+          doc.fontSize(12);
+
+          // Tabla de datos del cliente
+          const clientData = [
+            [
+              "Nombre",
+              `${financiamiento.Nombre} ${financiamiento.ApellidoPaterno} ${financiamiento.ApellidoMaterno}`,
+            ],
+            ["Teléfono", financiamiento.Telefono],
+            ["Correo electrónico", financiamiento.Correo],
+            ["Estado de Nacimiento", financiamiento.EstadoNacimiento],
+            ["Régimen Fiscal", financiamiento.RegimenFiscal],
+            ["Fuente de Ingresos", financiamiento.FuenteIngresos],
+            ["Sexo", financiamiento.Genero],
+            ["Ingreso Neto", financiamiento.IngresoNeto],
+          ];
+
+          // Dibujar tabla de datos del cliente
+          let startY = 260;
+          clientData.forEach(([key, value], index) => {
+            if (index % 2 === 0) {
+              doc.rect(50, startY - 5, 500, 20).fill('#f0f0f0').stroke();
+            }
+            doc.fillColor('black').text(key, 50, startY);
+            doc.text(value, 200, startY);
+            startY += 20;
+          });
+
+          // Datos del vehículo
+          doc.fontSize(16).text("Datos del vehículo:", 50, startY + 20);
+          doc.fontSize(12);
+
+          // Tabla de datos del vehículo
+          const vehicleData = [
+            ["Modelo", vehiculo.Modelo],
+            ["Color", vehiculo.Color],
+            ["Marca", vehiculo.Marca],
+            ["Precio del vehículo", vehiculo.Precio],
+            ["Kilometraje", vehiculo.Kilometraje],
+            ["Número de serie", vehiculo.NumeroSerie],
+            ["Año", vehiculo.Año],
+          ];
+
+          // Dibujar tabla de datos del vehículo
+          startY += 40;
+          vehicleData.forEach(([key, value], index) => {
+            if (index % 2 === 0) {
+              doc.rect(50, startY - 5, 500, 20).fill('#f0f0f0').stroke();
+            }
+            doc.fillColor('black').text(key, 50, startY);
+            doc.text(value, 200, startY);
+            startY += 20;
+          });
+
+          // Plan financiero
+          doc.fontSize(16).text("Plan Financiero:", 50, startY + 20);
+          doc.fontSize(12);
+
+          // Tabla de plan financiero
+          const financialPlanData = [
+            ["Enganche", financiamiento.Enganche],
+            ["Mensualidades", financiamiento.Mensualidad],
+            ["Seguro", financiamiento.Seguro],
+          ];
+
+          // Dibujar tabla de plan financiero
+          startY += 40;
+          financialPlanData.forEach(([key, value], index) => {
+            if (index % 2 === 0) {
+              doc.rect(50, startY - 5, 500, 20).fill('#f0f0f0').stroke();
+            }
+            doc.fillColor('black').text(key, 50, startY);
+            doc.text(value, 200, startY);
+            startY += 20;
+          });
+
+          // Finalizar el documento
+          doc.end();
+
+          stream.on("finish", () => {
+            res.download(
+              filePath,
+              `financiamiento_${idFinanciamiento}.pdf`,
+              (err) => {
+                if (err) {
+                  console.error("Error al descargar el PDF:", err);
+                  return res.status(500).send("Error al descargar el PDF");
+                }
+                fs.unlinkSync(filePath); // Eliminar el archivo después de la descarga
+              }
+            );
+          });
+        }
+      );
     }
   );
 });
