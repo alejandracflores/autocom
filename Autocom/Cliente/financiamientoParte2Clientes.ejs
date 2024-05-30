@@ -23,30 +23,15 @@
             </div>
         </div>
         <div class="flex justify-center items-center w-full">
-            <img class="w-[90%]" src="../img/carro1.png" alt="modelo de carro">
+            <img class="w-[90%]" src="../img/vehiculos/001.png" alt="modelo de carro">
         </div>
     </main>
-    <footer class="flex justify-around mt-20">
-        <button class="bg-[#7c7c7c] py-5 px-7 rounded-lg text-white font-bold text-3xl"
+    <footer class="flex justify-around mt-20"><button
+            class="bg-[#7c7c7c] py-5 px-7 rounded-lg text-white font-bold text-3xl"
             onclick="verFinanciamiento('<%= idFinanciamiento %>')">Ver financiamiento</button>
         <button class="bg-black py-5 px-7 rounded-lg text-white font-bold text-3xl">Volver al inicio</button>
     </footer>
 </body>
-<script>
-    window.onload = function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        const isDownloadSuccess = urlParams.has('idFinanciamiento');
-
-        if (isDownloadSuccess) {
-            Swal.fire({
-                title: 'Éxito',
-                text: 'El archivo de financiamiento ha sido descargado exitosamente.',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        }
-    };
-</script>
 
 <script>
     function verFinanciamiento(idFinanciamiento) {
