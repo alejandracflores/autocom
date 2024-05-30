@@ -28,6 +28,13 @@ function loadUser() {
                 console.log(id);
             });
         });
+        document.querySelectorAll('.btn-ventas').forEach(button => {
+            button.addEventListener('click', function() {
+                let id = button.dataset.id;
+                window.location.href = 'http://localhost:3000/ventas?id=' + id;
+                console.log(id);
+            });
+        });
     }).catch(function (err) {
         console.log(err);
     });
@@ -46,7 +53,7 @@ function displayUser(users) {
                 <td class="border px-4 py-2">${user.Nombre} ${user.Apellido}</td>
                 <td class="border px-4 py-2 flex justify-center">
                     <div class="flex space-x-2">
-                        <button class="btn-ventas bg-gray-500 hover:bg-gray-600 text-white px-4 py-1 rounded-md" data-id="${user.idEmpleado}">Ventas</button>
+                        <button class="btn-ventas bg-gray-500 hover:bg-gray-600 text-white px-4 py-1 rounded-md" data-id="${user.idEmpleado}">Reservas</button>
                         <button class="btn-edit bg-gray-500 hover:bg-gray-600 text-white px-4 py-1 rounded-md" data-id="${user.idEmpleado}">Editar</button>
                         <button class="btn-delete bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-md" data-id="${user.idEmpleado}">Eliminar</button>
                     </div>
@@ -90,6 +97,7 @@ function searchEmployee() {
             console.log(error);
         });
 }
+
 
 function displayUserSearch(users) {
     const detailsDiv = document.getElementById('employee-columns');
