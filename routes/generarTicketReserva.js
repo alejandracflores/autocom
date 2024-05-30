@@ -53,35 +53,91 @@ router.get("/generarTicketReserva", (req, res) => {
       doc.pipe(stream);
 
       // Detalle de la reserva
-      doc.fontSize(20).text("Detalle de Reserva", { align: "center" });
-      doc.moveDown();
-      doc.fontSize(12).text(`Nombre: ${reserva.Nombre}`);
-      doc.text(`Dirección: ${reserva.Direccion}`);
-      doc.text(`Teléfono: ${reserva.Telefono}`);
-      doc.text(`Correo: ${reserva.Correo}`);
-      doc.text(`Género: ${reserva.Genero}`);
-      doc.text(`Edad: ${reserva.Edad}`);
-      doc.text(`Fecha de Venta: ${new Date(reserva.FechaVenta).toLocaleDateString()}`);
-      doc.moveDown();
-      doc.fontSize(16).text("Detalles del Vehículo", { align: "center" });
-      doc.moveDown();
-      doc.fontSize(12).text(`Marca: ${reserva.Marca}`);
-      doc.text(`Modelo: ${reserva.Modelo}`);
-      doc.text(`Año: ${reserva.Año}`);
-      doc.text(`Precio: $${reserva.Precio}`);
-      doc.text(`Kilometraje: ${reserva.Kilometraje} km`);
-      doc.text(`Tipo: ${reserva.TipoVehiculo}`);
+      // Logo
+      doc.image("./Autocom/img/logoAutocom.png", 50, 50, { width: 150 });
 
-      doc.end(); // Finalizar la escritura al PDF
+      // Título y fecha
+      doc.fontSize(20).text("Detalle de Reserva", 50, 160);
+      const fechaActual = new Date().toLocaleDateString();
+      doc.fontSize(12).text(`Fecha: ${fechaActual}`, 450, 50);
+
+      // Información de la sucursal
+      doc.fontSize(16).text("Sucursal:", 50, 200);
+      doc.fontSize(12).text("Bernardo Quintana Queretaro, Queretaro", 50, 220);
+
+      // Datos del cliente
+      doc.fontSize(16).text("Datos del Cliente:", 50, 260);
+      doc.fontSize(12);
+
+      // Tabla de datos del cliente
+      const clientData = [
+        ["Nombre", reserva.Nombre],
+        ["Dirección", reserva.Direccion],
+        ["Teléfono", reserva.Telefono],
+        ["Correo", reserva.Correo],
+        ["Género", reserva.Genero],
+        ["Edad", reserva.Edad],
+      ];
+
+      // Dibujar tabla de datos del cliente
+      let startY = 280;
+      clientData.forEach(([key, value], index) => {
+        if (index % 2 === 0) {
+          doc.rect(50, startY - 5, 500, 20).fill("#f0f0f0").stroke();
+        }
+        doc.fillColor("black").text(key, 50, startY);
+        doc.text(value, 200, startY);
+        startY += 20;
+      });
+
+      // Datos del vehículo
+      doc.fontSize(16).text("Detalles del Vehículo:", 50, startY + 20);
+      doc.fontSize(12);
+
+      // Tabla de datos del vehículo
+      const vehicleData = [
+        ["Marca", reserva.Marca],
+        ["Modelo", reserva.Modelo],
+        ["Año", reserva.Año],
+        ["Precio", `$${reserva.Precio}`],
+        ["Kilometraje", `${reserva.Kilometraje} km`],
+        ["Tipo", reserva.TipoVehiculo],
+      ];
+
+      // Dibujar tabla de datos del vehículo
+      startY += 40;
+      vehicleData.forEach(([key, value], index) => {
+        if (index % 2 === 0) {
+          doc.rect(50, startY - 5, 500, 20).fill("#f0f0f0").stroke();
+        }
+        doc.fillColor("black").text(key, 50, startY);
+        doc.text(value, 200, startY);
+        startY += 20;
+      });
+
+      // Código QR simulado y hash de certificación
+      doc.rect(50, startY + 50, 100, 100).stroke(); // Dibujar un cuadro para simular el QR
+      doc.text(
+        "ABC1234567890DEF1234567890GHI1234567890JKL1234567890MNO1234567890PQR1234567890STU1234567890VWX1234567890YZ!@#4567890$%^1234567890&*()_+1234567890-=[]1234567890{}|;':1234567890,.<>?1234567890/~`1234567890ABC1234567890DEF1234567890GHI1234567890JKL1234567890MNO1234567890PQR1234567890STU1234567890VWX1234567890YZ!@#4567890$%^1234567890&*()_+1234567890-=[]1234567890{}|;':1234567890,.<>?1234567890/~`1234567890",
+        160,
+        startY + 50, 100, 100
+      );
+
+      // Finalizar el documento
+      doc.end();
 
       stream.on("finish", () => {
-        res.download(filePath, `reserva_${idReserva}.pdf`, (err) => {
-          if (err) {
-            console.error("Error al descargar el PDF:", err);
-            return res.status(500).send("Error al descargar el PDF");
+        res.download(
+          filePath,
+          `reserva_${idReserva}.pdf`,
+          (err) => {
+            if (err) {
+              console.error("Error al descargar el PDF:", err);
+              return res.status(500).send("Error al descargar el PDF");
+            }
+            fs.unlinkSync(filePath); // Eliminar el archivo después de la descarga
           }
-          fs.unlinkSync(filePath); // Eliminar el archivo después de la descarga
-        });
+        );
       });
     }
   );
